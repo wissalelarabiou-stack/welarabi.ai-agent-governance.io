@@ -3,51 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio GitHub</title>
+    <title>Veille Stratégique : L'Entreprise Agentique</title>
     <style>
+        :root {
+            --prune: #673147; /* Couleur Dividende Prune */
+            --prune-light: #f4ecef;
+            --text: #333;
+            --white: #ffffff;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--text);
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f4f4f9;
-            color: #333;
+            padding: 0;
+            background-color: #f9f9f9;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        header {
+            background-color: var(--prune);
+            color: var(--white);
+            padding: 3rem 1rem;
             text-align: center;
-            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        h1 { color: #2ea44f; } /* Couleur verte GitHub */
-        p { font-size: 1.1rem; }
-        .btn {
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding-bottom: 2rem;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; }
+        h2 { color: var(--prune); border-bottom: 2px solid var(--prune-light); padding-bottom: 0.5rem; margin-top: 2rem; }
+        h3 { color: var(--prune); }
+
+        .problematique {
+            background-color: var(--prune-light);
+            border-left: 5px solid var(--prune);
+            padding: 1.5rem;
+            font-style: italic;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th { background-color: var(--prune); color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #ddd; }
+
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .badge {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #24292e;
+            background: var(--prune);
             color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: 0.3s;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
         }
-        .btn:hover { background-color: #444; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Bonjour, Monde ! 🚀</h1>
-        <p>Bienvenue sur mon premier site hébergé via <strong>GitHub Pages</strong>.</p>
-        <p>C'est un début modeste, mais le code est propre et prêt à évoluer.</p>
-        <a href="https://github.com" class="btn">Voir mon profil GitHub</a>
+<header>
+    <h1>Vers l'Entreprise Agentique</h1>
+    <p>Stratégies de déploiement et défis de gouvernance des systèmes multi-agents</p>
+</header>
+
+<div class="container">
+    
+    <h2>🚀 Introduction</h2>
+    <p>Ce rapport présente les conclusions d'une veille stratégique portant sur le passage de l'IA générative passive à l'IA agentique active. Ce changement de paradigme transforme l'IA d'un simple outil de réponse en une véritable <strong>force de travail numérique</strong> capable d'exécuter des actions autonomes.</p>
+
+    <div class="problematique">
+        <strong>Problématique :</strong> Comment accorder une autonomie décisionnelle à une IA tout en garantissant la sécurité des données et le contrôle stratégique de ses actions ?
     </div>
+
+    <h2>📊 Méthodologie de Veille (MOS 4.4)</h2>
+    <p>Le dispositif de veille a été structuré pour capturer l'innovation technique tout en analysant les impacts managériaux.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Approche</th>
+                <th>Outils</th>
+                <th>Cibles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Push</strong></td>
+                <td>Google Alerts, Flux RSS</td>
+                <td>Actualités Frameworks (LangGraph, AutoGen)</td>
+            </tr>
+            <tr>
+                <td><strong>Pull</strong></td>
+                <td>NotebookLM, Perplexity</td>
+                <td>Livres blancs (Auth0, IBM) et Recherche (ArXiv)</td>
+            </tr>
+            <tr>
+                <td><strong>Curation</strong></td>
+                <td>Zotero</td>
+                <td>Gestion et citation des sources académiques</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔍 Axes d'Analyse</h2>
+    
+    <h3>1. Architecture & Systèmes Multi-Agents (MAS)</h3>
+    <p>Contrairement aux modèles monolithiques, les systèmes multi-agents permettent une spécialisation des tâches. Chaque agent dispose d'une <strong>mémoire</strong>, d'un <strong>modèle cognitif</strong> et d'un accès à des <strong>outils</strong> (APIs, Web) pour interagir avec le monde réel.</p>
+
+    <h3>2. Risques Opérationnels & Sécurité</h3>
+    <ul>
+        <li><strong>Hallucinations actives :</strong> Exécution d'actions basées sur des erreurs de raisonnement.</li>
+        <li><strong>Non-Human Identity :</strong> Le défi majeur identifié par <em>Auth0</em> : sécuriser des identités logicielles agissant sans intervention humaine.</li>
+        <li><strong>Boucles infinies :</strong> Consommation de ressources suite à des erreurs de planification.</li>
+    </ul>
+
+    <h3>3. Gouvernance : Le contrôle de l'autonomie</h3>
+    <p>La mise en place de protocoles tels que le <strong>Human-in-the-loop</strong> et l'utilisation du <strong>Model Context Protocol (MCP)</strong> sont essentiels pour maintenir une supervision efficace et sécurisée.</p>
+
+    <div class="footer">
+        <p><strong>Auteur :</strong> Wissal EL ARABIOU | <strong>Tuteur :</strong> M. MOHSEN</p>
+        <p>Soutenance le 31 Janvier 2026 - Module MOS 4.4</p>
+        <div style="margin-top:10px;">
+            <span class="badge">IA Agentique</span>
+            <span class="badge">Veille Stratégique</span>
+            <span class="badge">Cyberécurité</span>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
