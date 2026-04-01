@@ -1,156 +1,1143 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veille Stratégique : L'Entreprise Agentique</title>
-    <style>
-        :root {
-            --prune: #673147; /* Couleur Dividende Prune */
-            --prune-light: #f4ecef;
-            --text: #333;
-            --white: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport de Veille Technologique — Vers l'Entreprise Agentique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ee;
+    --bg2: #ede9e2;
+    --bg3: #e4dfd6;
+    --accent: #c0392b;
+    --accent2: #e67e22;
+    --accent3: #27ae60;
+    --gold: #d4a017;
+    --text: #1a1208;
+    --text-muted: #6b5c45;
+    --border: rgba(192,57,43,0.18);
+    --card: rgba(255,252,248,0.85);
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        header {
-            background-color: var(--prune);
-            color: var(--white);
-            padding: 3rem 1rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+  html { scroll-behavior: smooth; }
 
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            padding-bottom: 2rem;
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
 
-        h1 { margin: 0; font-size: 2.5rem; }
-        h2 { color: var(--prune); border-bottom: 2px solid var(--prune-light); padding-bottom: 0.5rem; margin-top: 2rem; }
-        h3 { color: var(--prune); }
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.5;
+  }
 
-        .problematique {
-            background-color: var(--prune-light);
-            border-left: 5px solid var(--prune);
-            padding: 1.5rem;
-            font-style: italic;
-            margin: 2rem 0;
-        }
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(245,242,238,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 10rem 3rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .orb1 { width: 600px; height: 600px; background: #e8c4b8; top: -150px; right: -100px; animation: drift 8s ease-in-out infinite alternate; }
+  .orb2 { width: 400px; height: 400px; background: #f5d8b0; bottom: 0; left: 200px; animation: drift 11s ease-in-out infinite alternate-reverse; }
+  .orb3 { width: 300px; height: 300px; background: #b8d8c4; top: 200px; left: -100px; animation: drift 14s ease-in-out infinite alternate; }
 
-        th { background-color: var(--prune); color: white; padding: 12px; text-align: left; }
-        td { padding: 12px; border-bottom: 1px solid #ddd; }
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.08); }
+  }
 
-        .footer {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #777;
-            margin-top: 3rem;
-            padding: 2rem;
-            border-top: 1px solid #eee;
-        }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 40px; height: 1px; background: var(--accent);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+    margin-bottom: 1rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem; max-width: 650px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-meta {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(192,57,43,0.25);
+    padding-top: 2rem;
+  }
+  .hero-meta span strong {
+    display: block; color: var(--text);
+    font-size: 0.85rem; margin-bottom: 0.15rem;
+  }
 
-        .badge {
-            display: inline-block;
-            background: var(--prune);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-        }
-    </style>
+  /* ─── LAYOUT ─── */
+  main { position: relative; z-index: 1; }
+
+  .section {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-full {
+    padding: 6rem 3rem;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .section-full .inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(192,57,43,0.3), transparent);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  p { margin-bottom: 1.2rem; color: var(--text); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── PROBLEM BLOCK ─── */
+  .problematique {
+    background: linear-gradient(135deg, rgba(192,57,43,0.07), rgba(230,126,34,0.07));
+    border: 1px solid rgba(192,57,43,0.25);
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    position: relative; overflow: hidden;
+    margin: 3rem 0;
+  }
+  .problematique::before {
+    content: '"';
+    position: absolute; top: -0.3rem; left: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem; line-height: 1;
+    color: rgba(192,57,43,0.1);
+    pointer-events: none;
+  }
+  .problematique p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-style: italic;
+    color: var(--text); position: relative; z-index: 1;
+  }
+
+  /* ─── STAT CARDS ─── */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem; margin: 3rem 0;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 2rem 1.75rem;
+    position: relative; overflow: hidden;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .stat-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .stat-card::after {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--accent), var(--accent2));
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+  .stat-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; color: rgba(136,146,176,0.6);
+    margin-top: 0.75rem;
+  }
+
+  /* ─── DEFINITION BLOCK ─── */
+  .def-block {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 2rem;
+    background: rgba(79,142,247,0.05);
+    border-radius: 0 8px 8px 0;
+    margin: 2rem 0;
+  }
+  .def-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; color: var(--accent);
+    margin-top: 0.5rem;
+  }
+
+  /* ─── CONTENT GRID ─── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  @media(max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ─── ARCHITECTURE DIAGRAM (CSS) ─── */
+  .arch-diagram {
+    background: rgba(255,252,248,0.9);
+    border: 1px solid rgba(192,57,43,0.18);
+    border-radius: 12px; padding: 2rem;
+    margin: 2rem 0;
+  }
+  .arch-level {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 1rem;
+  }
+  .arch-node {
+    background: rgba(192,57,43,0.07);
+    border: 1px solid rgba(192,57,43,0.28);
+    border-radius: 8px; padding: 0.75rem 1.25rem;
+    font-size: 0.8rem; text-align: center;
+    position: relative;
+  }
+  .arch-node.manager {
+    background: rgba(212,160,23,0.1);
+    border-color: rgba(212,160,23,0.45);
+    color: #a07010;
+  }
+  .arch-node.worker {
+    background: rgba(39,174,96,0.08);
+    border-color: rgba(39,174,96,0.3);
+    color: #1a7a40;
+  }
+  .arch-node.protocol {
+    background: rgba(230,126,34,0.08);
+    border-color: rgba(230,126,34,0.3);
+    color: #b05a10;
+  }
+  .arch-arrow {
+    text-align: center; color: var(--text-muted);
+    font-size: 1.2rem; margin: 0.25rem 0;
+  }
+  .arch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; color: var(--text-muted);
+    text-align: center; margin-bottom: 0.5rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* ─── RISK/FRAMEWORK CARDS ─── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.75rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .info-card:hover { border-color: rgba(79,142,247,0.5); transform: translateY(-2px); }
+  .info-card .card-icon {
+    width: 38px; height: 38px;
+    background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; margin-bottom: 1rem;
+  }
+  .info-card.danger .card-icon { background: rgba(192,57,43,0.1); border-color: rgba(192,57,43,0.3); }
+  .info-card.success .card-icon { background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.3); }
+  .info-card.purple .card-icon { background: rgba(230,126,34,0.1); border-color: rgba(230,126,34,0.3); }
+  .info-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .info-card p { font-size: 0.88rem; color: var(--text-muted); }
+
+  /* ─── FRAMEWORK COMPARISON ─── */
+  .fw-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+  .fw-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); padding: 1rem;
+    border-bottom: 2px solid rgba(192,57,43,0.2); text-align: left;
+    background: rgba(192,57,43,0.04);
+  }
+  .fw-table td {
+    padding: 1rem; border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.9rem; vertical-align: top;
+  }
+  .fw-table tr:hover td { background: rgba(192,57,43,0.03); }
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; padding: 0.2rem 0.65rem;
+    border-radius: 20px; margin: 0.15rem;
+    background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.25);
+    color: var(--accent);
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding: 2rem 0; }
+  .timeline::before {
+    content: ''; position: absolute; left: 2rem; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+  .tl-item { display: flex; gap: 2.5rem; margin-bottom: 2.5rem; position: relative; }
+  .tl-dot {
+    flex-shrink: 0; width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.25);
+    margin-top: 0.25rem; position: relative; z-index: 1;
+    margin-left: calc(2rem - 8px);
+  }
+  .tl-content { flex: 1; }
+  .tl-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--accent);
+    letter-spacing: 0.1em; margin-bottom: 0.4rem;
+  }
+
+  /* ─── SOURCES ─── */
+  .sources-list { counter-reset: src; }
+  .source-item {
+    counter-increment: src;
+    display: flex; gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .source-item::before {
+    content: counter(src, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--accent);
+    flex-shrink: 0; width: 2.5rem;
+    padding-top: 0.1rem;
+  }
+  .source-item a { color: var(--text-muted); text-decoration: none; }
+  .source-item a:hover { color: var(--accent); }
+  .src-title { color: var(--text); font-weight: 500; display: block; margin-bottom: 0.2rem; }
+
+  /* ─── ANNEXE METODOLOGIE ─── */
+  .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .method-step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+  }
+  .method-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900;
+    color: rgba(192,57,43,0.18); line-height: 1; margin-bottom: 0.5rem;
+  }
+  .method-step h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--accent); }
+  .method-step p { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--text-muted);
+  }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── TOC ─── */
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 2rem 2.5rem;
+    margin: 3rem 0;
+  }
+  .toc ol { padding-left: 1.25rem; }
+  .toc li { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .toc a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .toc a:hover { color: var(--accent); }
+
+  /* highlight inline */
+  .hl { color: var(--accent); font-weight: 500; }
+  .hl-green { color: #1a7a40; font-weight: 500; }
+  .hl-purple { color: #b05a10; font-weight: 500; }
+</style>
 </head>
 <body>
 
-<header>
-    <h1>Vers l'Entreprise Agentique</h1>
-    <p>Stratégies de déploiement et défis de gouvernance des systèmes multi-agents</p>
-</header>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MOS 4.4 — Veille Technologique 2025-2026</div>
+  <div class="nav-links">
+    <a href="#intro">Introduction</a>
+    <a href="#agents">Agents IA</a>
+    <a href="#archi">Architecture</a>
+    <a href="#risques">Risques</a>
+    <a href="#gouvernance">Gouvernance</a>
+    <a href="#methodo">Méthodologie</a>
+  </div>
+</nav>
 
-<div class="container">
-    
-    <h2>🚀 Introduction</h2>
-    <p>Ce rapport présente les conclusions d'une veille stratégique portant sur le passage de l'IA générative passive à l'IA agentique active. Ce changement de paradigme transforme l'IA d'un simple outil de réponse en une véritable <strong>force de travail numérique</strong> capable d'exécuter des actions autonomes.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+  <div class="hero-tag">Étude de Veille Technologique · Option INFO</div>
+  <h1 class="hero-title">Vers l'<em>Entreprise</em><br>Agentique</h1>
+  <p class="hero-subtitle">Stratégies de déploiement et défis de gouvernance des systèmes multi-agents autonomes — 2025-2026</p>
+  <div class="hero-meta">
+    <span><strong>Étudiante</strong>Wissal EL ARABIOU</span>
+    <span><strong>Module</strong>MOS 4.4 — NTIC</span>
+    <span><strong>Année</strong>2025 – 2026</span>
+    <span><strong>Format</strong>Rapport de synthèse HTML</span>
+  </div>
+</section>
 
-    <div class="problematique">
-        <strong>Problématique :</strong> Comment accorder une autonomie décisionnelle à une IA tout en garantissant la sécurité des données et le contrôle stratégique de ses actions ?
+<main>
+
+<!-- SOMMAIRE -->
+<section class="section" id="intro">
+  <div class="section-label">Sommaire</div>
+  <div class="toc reveal">
+    <ol>
+      <li><a href="#intro">Introduction & Problématique</a></li>
+      <li><a href="#contexte">Contexte et chiffres-clés du marché</a></li>
+      <li><a href="#agents">Qu'est-ce qu'un agent IA ? Définitions</a></li>
+      <li><a href="#workflow">Le workflow agentique</a></li>
+      <li><a href="#archi">Architecture des systèmes multi-agents</a></li>
+      <li><a href="#frameworks">Frameworks d'agents IA</a></li>
+      <li><a href="#risques">Risques opérationnels et défis de sécurité</a></li>
+      <li><a href="#gouvernance">Stratégies de gouvernance et contrôle</a></li>
+      <li><a href="#synthese">Synthèse</a></li>
+      <li><a href="#methodo">Annexe — Méthodologie de la veille</a></li>
+      <li><a href="#sources">Bibliographie & Sources</a></li>
+    </ol>
+  </div>
+
+  <h2>Introduction</h2>
+  <p>
+    Depuis l'émergence des grands modèles de langage (LLM) au début des années 2020, l'intelligence artificielle s'est principalement imposée sous sa forme <em>générative passive</em> — des systèmes capables de produire du contenu textuel, visuel ou sonore en réponse à une invite humaine. ChatGPT, Gemini, ou encore Claude en sont les exemples les plus visibles.
+  </p>
+  <p>
+    Mais en 2025–2026, le paradigme bascule. Nous assistons à une transition fondamentale vers l'<strong class="hl">IA agentique</strong> : des systèmes dotés d'une intentionnalité marquée, capables de décomposer des objectifs complexes en étapes, de raisonner, d'utiliser des outils logiciels, de prendre des décisions et d'agir de façon autonome sur des environnements numériques réels — sans intervention humaine constante.
+  </p>
+
+  <div class="problematique reveal">
+    <p>Comment concilier l'autonomie décisionnelle des agents IA avec les impératifs de sécurité des données et de contrôle managérial ?</p>
+  </div>
+
+  <p>
+    Cette question est au cœur de la transformation que vivent les entreprises. L'adoption massive de l'IA agentique ouvre des gains de productivité inédits, mais soulève simultanément des défis de gouvernance, de sécurité et d'organisation auxquels peu d'entreprises sont encore préparées.
+  </p>
+</section>
+
+<!-- CONTEXTE -->
+<section class="section-full" id="contexte">
+  <div class="inner">
+    <div class="section-label reveal">Contexte & Marché</div>
+    <h2 class="reveal">L'IA agentique en chiffres : un marché en explosion</h2>
+
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number">$52Md</div>
+        <div class="stat-label">Valeur projetée du marché des agents IA d'ici 2030 (contre 7,84 Md$ en 2025)</div>
+        <div class="stat-source">Source : IDC / Salesmate, 2026</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">40%</div>
+        <div class="stat-label">Des applications d'entreprise intégreront des agents IA d'ici fin 2026 (contre &lt;5% en 2025)</div>
+        <div class="stat-source">Source : Gartner, 2025–2026</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">1,3Md</div>
+        <div class="stat-label">Agents IA actifs attendus dans le monde d'ici 2028</div>
+        <div class="stat-source">Source : Splunk AI Trends, cité 2026</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">15%</div>
+        <div class="stat-label">Des décisions professionnelles quotidiennes pilotées par l'IA agentique d'ici 2028</div>
+        <div class="stat-source">Source : Gartner, 2026</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">63%</div>
+        <div class="stat-label">Des entreprises n'ont pas de politique de sécurité et de gouvernance de l'IA en 2025</div>
+        <div class="stat-source">Source : IBM Cost of Data Breach Report, 2025</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">44,8%</div>
+        <div class="stat-label">Taux de croissance annuel composé (CAGR) du marché de l'IA agentique</div>
+        <div class="stat-source">Source : Fortune Business Insights, 2025</div>
+      </div>
     </div>
 
-    <h2>📊 Méthodologie de Veille (MOS 4.4)</h2>
-    <p>Le dispositif de veille a été structuré pour capturer l'innovation technique tout en analysant les impacts managériaux.</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Approche</th>
-                <th>Outils</th>
-                <th>Cibles</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Push</strong></td>
-                <td>Google Alerts, Flux RSS</td>
-                <td>Actualités Frameworks (LangGraph, AutoGen)</td>
-            </tr>
-            <tr>
-                <td><strong>Pull</strong></td>
-                <td>NotebookLM, Perplexity</td>
-                <td>Livres blancs (Auth0, IBM) et Recherche (ArXiv)</td>
-            </tr>
-            <tr>
-                <td><strong>Curation</strong></td>
-                <td>Zotero</td>
-                <td>Gestion et citation des sources académiques</td>
-            </tr>
-        </tbody>
+    <p class="reveal">
+      Ces chiffres illustrent une réalité frappante : après une phase d'expérimentation en 2025, <span class="hl">2026 s'impose comme l'année de l'industrialisation massive</span> de l'IA agentique. Les entreprises délaissent les preuves de concept pour déployer des infrastructures critiques capables de gérer des cas complexes sans intervention humaine constante. (Infos-Entreprises, 2026)
+    </p>
+    <p class="reveal">
+      McKinsey estime par ailleurs que l'IA générative — dont l'agentique est l'aboutissement opérationnel — pourrait ajouter entre 2,6 et 4,4 trillions de dollars annuels au PIB mondial. (Salesmate, 2026)
+    </p>
+  </div>
+</section>
+
+<!-- AGENT IA -->
+<section class="section" id="agents">
+  <div class="section-label reveal">1 — Définitions fondamentales</div>
+  <h2 class="reveal">Qu'est-ce qu'un agent IA ?</h2>
+
+  <div class="def-block reveal">
+    <p>« Un système qui exécute des tâches de manière autonome en concevant des workflows à l'aide d'outils disponibles. »</p>
+    <div class="def-source">— IBM</div>
+  </div>
+
+  <p class="reveal">
+    Contrairement aux modèles d'IA générative purement conversationnels, un agent IA est conçu pour <strong>l'action</strong>. Il interprète des objectifs de haut niveau, planifie des séquences d'actions, utilise des outils (APIs, bases de données, navigateurs, code) et s'adapte aux résultats obtenus — en boucle fermée, sans être guidé pas à pas.
+  </p>
+
+  <div class="two-col reveal">
+    <div>
+      <h3>IA Générative passive</h3>
+      <p style="color:var(--text-muted)">Répond à une invite unique. Produit du contenu (texte, image, code). Attend la prochaine interaction humaine. Pas de mémoire ni d'action sur le monde réel.</p>
+    </div>
+    <div>
+      <h3>IA Agentique <span style="color:var(--accent3)">→ active</span></h3>
+      <p style="color:var(--text-muted)">Décompose un objectif en étapes. Exécute des actions réelles (appels API, envoi d'emails, création de tickets). Boucle de raisonnement continue. Adapte sa stratégie aux résultats.</p>
+    </div>
+  </div>
+
+  <p class="reveal">
+    L'IA agentique englobe des systèmes aussi variés que la conduite autonome, les agents de santé, les agents financiers et, au cœur de ce rapport, les <strong class="hl">agents d'entreprise</strong> capables d'automatiser des workflows de bout-en-bout. (Wikipédia — IA agentique, 2026)
+  </p>
+
+  <p class="reveal">
+    Ce qui distingue fondamentalement l'agent d'une simple automatisation : sa capacité à <em>raisonner en boucle</em> — évaluer les résultats, ajuster la stratégie et continuer à progresser vers l'objectif sans être relancé à chaque étape. (Salesmate, 2026)
+  </p>
+</section>
+
+<!-- WORKFLOW -->
+<section class="section-full" id="workflow">
+  <div class="inner">
+    <div class="section-label reveal">2 — Le workflow agentique</div>
+    <h2 class="reveal">Comment fonctionne un workflow agentique ?</h2>
+
+    <div class="def-block reveal">
+      <p>« C'est un système où des agents autonomes prennent des décisions et coordonnent des tâches avec une intervention humaine minimale. »</p>
+      <div class="def-source">— IBM</div>
+    </div>
+
+    <p class="reveal">
+      Dans un workflow agentique, le processus n'est plus déclenché par une invite humaine à chaque étape. Un objectif est défini (ex. : "traiter toutes les factures reçues cette semaine"), et le système s'organise de façon autonome pour y répondre en mobilisant les ressources disponibles.
+    </p>
+
+    <div class="arch-diagram reveal">
+      <div class="arch-label">Exemple — Contrôleur Financier Intelligent (orchestration verticale)</div>
+      <div class="arch-level">
+        <div class="arch-node manager">🧠 Agent Superviseur (Manager)<br><small>Reçoit les factures · Analyse le contexte · Délègue</small></div>
+      </div>
+      <div class="arch-arrow">↓ délégation</div>
+      <div class="arch-level">
+        <div class="arch-node worker">🔍 Agent Extraction<br><small>Outil : OCR<br>Extrait montants et dates</small></div>
+        <div class="arch-node worker">⚖️ Agent Conformité<br><small>Outil : RAG Policies<br>Vérifie fraude et doublons</small></div>
+        <div class="arch-node worker">🗄️ Agent ERP<br><small>Outil : API SAP<br>Crée l'écriture comptable</small></div>
+      </div>
+      <div style="text-align:center;margin-top:1.25rem;font-size:0.82rem;color:#1a7a40">
+        ✅ Réduction du cycle : de jours à minutes &nbsp;|&nbsp; 📋 Auditabilité : 100% des étapes loggées
+      </div>
+    </div>
+
+    <p class="reveal">
+      Les entreprises pionnières dans l'adoption de ces systèmes rapportent des gains mesurables : <span class="hl-green">réduction des délais logistiques jusqu'à 40%</span>, diminution du temps de traitement des appels clients de près de 25%, et cycles de workflow accélérés de 20 à 30% dans les opérations back-office. (Salesmate, 2026)
+    </p>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section" id="archi">
+  <div class="section-label reveal">3 — Architecture</div>
+  <h2 class="reveal">Architecture des systèmes multi-agents</h2>
+
+  <p class="reveal">
+    Un système multi-agent (SMA) est un écosystème d'IA collaboratif où des agents spécialisés travaillent ensemble pour résoudre des problèmes complexes. À l'instar d'une équipe humaine, chaque agent possède une expertise propre. (Salesmate, 2026)
+  </p>
+
+  <div class="two-col reveal">
+    <div>
+      <h3>🔼 Orchestration verticale</h3>
+      <p>Un agent <strong>superviseur (Manager)</strong> reçoit l'objectif global, le décompose en sous-tâches et délègue à des agents spécialisés. Il supervise l'exécution et consolide les résultats. Ce modèle est idéal pour les processus hiérarchiques avec une logique de validation.</p>
+    </div>
+    <div>
+      <h3>🔄 Orchestration horizontale</h3>
+      <p>Le modèle <strong>collaboratif (Agent-to-Agent)</strong> : des agents autonomes discutent et négocient entre eux pour résoudre une tâche sans chef unique. Standardisé par le protocole <span class="hl">A2A (Agent-to-Agent)</span> de Google et le <span class="hl">MCP (Model Context Protocol)</span> d'Anthropic.</p>
+    </div>
+  </div>
+
+  <div class="arch-diagram reveal" style="margin-top:2.5rem">
+    <div class="arch-label">Protocoles standards d'interopérabilité</div>
+    <div class="arch-level" style="flex-wrap:wrap;gap:1rem">
+      <div class="arch-node protocol">🔗 MCP — Model Context Protocol<br><small>Standard universel pour connecter agents et données d'entreprise (Anthropic)</small></div>
+      <div class="arch-node protocol">🤝 A2A — Agent-to-Agent<br><small>Standardisation des échanges inter-agents (Google)</small></div>
+      <div class="arch-node protocol">🔑 IAAG — Cross App Access<br><small>Gestion des identités et autorisations agentiques (Okta/OpenID, depuis 2025)</small></div>
+    </div>
+  </div>
+
+  <p class="reveal">
+    Gartner a enregistré une hausse de <strong class="hl">1 445%</strong> des demandes d'information sur les systèmes multi-agents entre le 1er trimestre 2024 et le 2e trimestre 2025. Le monde de l'entreprise est en train de vivre sa propre « révolution des microservices » : les agents monolithiques cèdent la place à des orchestrations de spécialistes. (MachineLearningMastery, 2026)
+  </p>
+</section>
+
+<!-- FRAMEWORKS -->
+<section class="section-full" id="frameworks">
+  <div class="inner">
+    <div class="section-label reveal">4 — Frameworks</div>
+    <h2 class="reveal">Principaux frameworks d'agents IA</h2>
+
+    <p class="reveal">
+      Le choix du framework conditionne l'architecture du système, sa maintenabilité et sa capacité à intégrer le contrôle humain. Trois frameworks s'imposent actuellement comme références industrielles.
+    </p>
+
+    <table class="fw-table reveal">
+      <thead>
+        <tr>
+          <th>Framework</th>
+          <th>Approche</th>
+          <th>Points forts</th>
+          <th>Cas d'usage idéal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CrewAI</strong></td>
+          <td><span class="badge">Rôle</span></td>
+          <td>Facilité d'usage très élevée. Assignation claire de rôles aux agents.</td>
+          <td>Processus séquentiels hiérarchiques clairs</td>
+        </tr>
+        <tr>
+          <td><strong>LangGraph</strong></td>
+          <td><span class="badge">Graphe d'états</span></td>
+          <td>Contrôle granulaire. Support natif du Human-in-the-loop. Logique conditionnelle avancée.</td>
+          <td>Workflows complexes, validation humaine obligatoire</td>
+        </tr>
+        <tr>
+          <td><strong>AutoGen</strong></td>
+          <td><span class="badge">Conversationnel</span></td>
+          <td>Résolution par le dialogue multi-agents. Idéal pour prototypage rapide.</td>
+          <td>Génération de code, recherche automatisée</td>
+        </tr>
+      </tbody>
     </table>
 
-    <h2>🔍 Axes d'Analyse</h2>
-    
-    <h3>1. Architecture & Systèmes Multi-Agents (MAS)</h3>
-    <p>Contrairement aux modèles monolithiques, les systèmes multi-agents permettent une spécialisation des tâches. Chaque agent dispose d'une <strong>mémoire</strong>, d'un <strong>modèle cognitif</strong> et d'un accès à des <strong>outils</strong> (APIs, Web) pour interagir avec le monde réel.</p>
+    <p class="reveal">
+      <strong>LangGraph</strong> se distingue par son support natif du mécanisme <span class="hl">Human-in-the-loop</span> — une exigence de gouvernance majeure pour les déploiements en production sur des processus critiques.
+    </p>
+  </div>
+</section>
 
-    <h3>2. Risques Opérationnels & Sécurité</h3>
-    <ul>
-        <li><strong>Hallucinations actives :</strong> Exécution d'actions basées sur des erreurs de raisonnement.</li>
-        <li><strong>Non-Human Identity :</strong> Le défi majeur identifié par <em>Auth0</em> : sécuriser des identités logicielles agissant sans intervention humaine.</li>
-        <li><strong>Boucles infinies :</strong> Consommation de ressources suite à des erreurs de planification.</li>
-    </ul>
+<!-- RISQUES -->
+<section class="section" id="risques">
+  <div class="section-label reveal">5 — Risques & Sécurité</div>
+  <h2 class="reveal">Défis opérationnels et de sécurité</h2>
 
-    <h3>3. Gouvernance : Le contrôle de l'autonomie</h3>
-    <p>La mise en place de protocoles tels que le <strong>Human-in-the-loop</strong> et l'utilisation du <strong>Model Context Protocol (MCP)</strong> sont essentiels pour maintenir une supervision efficace et sécurisée.</p>
+  <p class="reveal">
+    L'autonomie des agents IA est leur principale force — et leur principal vecteur de risque. Lorsqu'un agent dispose d'accès étendus et agit à vitesse machine, une erreur ou une compromission peut avoir des conséquences bien plus rapides et étendues qu'un incident impliquant un humain.
+  </p>
 
-    <div class="footer">
-        <p><strong>Auteur :</strong> Wissal EL ARABIOU | <strong>Tuteur :</strong> M. MOHSEN</p>
-        <p>Soutenance le 31 Janvier 2026 - Module MOS 4.4</p>
-        <div style="margin-top:10px;">
-            <span class="badge">IA Agentique</span>
-            <span class="badge">Veille Stratégique</span>
-            <span class="badge">Cyberécurité</span>
-        </div>
+  <h3 class="reveal" style="margin-top:2rem">5.1 — Risques opérationnels</h3>
+
+  <div class="cards-grid reveal">
+    <div class="info-card danger">
+      <div class="card-icon">🧠</div>
+      <h3>Hallucinations actives</h3>
+      <p>Un agent peut prendre une décision erronée basée sur une information inventée, et l'exécuter dans le monde réel — sans filtre humain.</p>
     </div>
-</div>
+    <div class="info-card danger">
+      <div class="card-icon">🔄</div>
+      <h3>Boucles infinies</h3>
+      <p>L'agent tourne en rond, génère des appels API répétitifs et peut faire exploser les coûts de traitement avant qu'une alarme soit déclenchée.</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">⏱️</div>
+      <h3>Latence de raisonnement</h3>
+      <p>Les raisonnements complexes créent des goulots d'étranglement, rendant le système imprévisible pour des processus à contraintes temps réel.</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">📉</div>
+      <h3>Dérive du modèle</h3>
+      <p>Le comportement de l'agent évolue imperceptiblement au fil du temps, s'écartant des flux de travail planifiés sans déclenchement d'alerte.</p>
+    </div>
+  </div>
 
+  <h3 class="reveal" style="margin-top:2.5rem">5.2 — Défis de sécurité : l'identité non-humaine</h3>
+
+  <p class="reveal">
+    Le rapport <strong>IBM X-Force Threat Intelligence 2025</strong> révèle que 30% des violations de données commencent par des attaques basées sur l'identité, et que les outils classiques de gestion des identités (IAM) n'ont jamais été conçus pour des identités autonomes et autogérées.
+  </p>
+
+  <div class="cards-grid reveal">
+    <div class="info-card danger">
+      <div class="card-icon">🪪</div>
+      <h3>Non-Human Identity (NHI)</h3>
+      <p>Les méthodes d'authentification classiques (MFA) sont inadaptées aux agents. En 2026, les identités non-humaines dépasseront en nombre les identités humaines. (HarfangLab, 2026)</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">🔑</div>
+      <h3>Exposition des secrets</h3>
+      <p>Les clés API stockées représentent une surface d'attaque critique. Un agent compromis peut exploiter ces accès à la vitesse de la machine. (IBM, 2025)</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">💉</div>
+      <h3>Prompt Injection indirecte</h3>
+      <p>Un agent peut être détourné par des contenus malveillants présents dans des sources externes qu'il consulte (emails, pages web), sans que l'utilisateur en soit conscient. (OWASP LLM Top 10)</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">👻</div>
+      <h3>Shadow AI (IA fantôme)</h3>
+      <p>Seulement 6% des organisations disposent de cadres de gouvernance pour superviser leurs agents IA. Les agents déployés sans supervision IT créent des zones grises invisibles. (Drivingeco, 2026)</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">🔓</div>
+      <h3>Fuite de données (PII)</h3>
+      <p>Un agent mal configuré peut divulguer des milliers d'enregistrements sensibles en quelques minutes. 97% des entreprises ayant subi une violation liée à l'IA ne disposaient pas de contrôles d'accès appropriés. (IBM, 2025)</p>
+    </div>
+    <div class="info-card danger">
+      <div class="card-icon">⚡</div>
+      <h3>Vitesse d'exécution destructrice</h3>
+      <p>Les agents héritent de tous les droits d'accès de leurs opérateurs humains mais agissent sans le discernement qui pousserait un humain à réfléchir avant d'agir. (Kiteworks, 2026)</p>
+    </div>
+  </div>
+</section>
+
+<!-- GOUVERNANCE -->
+<section class="section-full" id="gouvernance">
+  <div class="inner">
+    <div class="section-label reveal">6 — Gouvernance</div>
+    <h2 class="reveal">Stratégies de gouvernance et de contrôle</h2>
+
+    <p class="reveal">
+      En 2026, la gouvernance n'est plus perçue comme un obstacle bureaucratique mais comme un <strong class="hl-green">prérequis de déploiement</strong>. Les organisations qui réussissent à déployer l'IA agentique à grande échelle sont celles qui ont investi dans des cadres de contrôle dès la conception. (MachineLearningMastery, 2026)
+    </p>
+
+    <div class="two-col reveal" style="margin-top:2rem">
+      <div>
+        <h3>🔧 Gouvernance technique</h3>
+        <div class="cards-grid" style="grid-template-columns:1fr">
+          <div class="info-card success">
+            <div class="card-icon">🛡️</div>
+            <h3>Garde-fous (Guardrails)</h3>
+            <p>Filtres d'entrée/sortie pour détecter les tentatives de Prompt Injection. Vérification sémantique des réponses pour bloquer les hallucinations avant transmission aux outils.</p>
+          </div>
+          <div class="info-card success">
+            <div class="card-icon">📦</div>
+            <h3>Sandboxing (environnements isolés)</h3>
+            <p>Exécution des agents dans des containers sans accès au réseau interne global. Plafonds budgétaires : limites de consommation de tokens et d'appels API.</p>
+          </div>
+          <div class="info-card success">
+            <div class="card-icon">🔐</div>
+            <h3>Least Privilege (moindre privilège)</h3>
+            <p>Attribution de droits limités : un agent ne doit accéder qu'aux tables de données strictement nécessaires à sa mission, pas à l'ensemble du système.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>🏢 Gouvernance organisationnelle</h3>
+        <div class="cards-grid" style="grid-template-columns:1fr">
+          <div class="info-card purple">
+            <div class="card-icon">👤</div>
+            <h3>Human-in-the-loop (HITL)</h3>
+            <p>Points de contrôle obligatoires pour les actions critiques (virements, emails de masse). L'agent propose, l'humain autorise. Support natif dans LangGraph et CrewAI.</p>
+          </div>
+          <div class="info-card purple">
+            <div class="card-icon">📋</div>
+            <h3>Auditabilité & Traçabilité</h3>
+            <p>Enregistrement complet du raisonnement de l'agent (Chain of Thought Logging). Capacité de "Post-Mortem" : comprendre précisément pourquoi une décision a été prise après incident.</p>
+          </div>
+          <div class="info-card purple">
+            <div class="card-icon">🛑</div>
+            <h3>Kill Switch (arrêt d'urgence)</h3>
+            <p>Procédure de débrayage immédiat pour reprendre le contrôle manuel sur tous les systèmes automatisés en cas d'anomalie détectée.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="def-block reveal" style="margin-top:2.5rem; border-color: var(--accent3)">
+      <p>La question la plus difficile dans une entreprise axée sur l'IA n'est pas de savoir si un agent <em>peut</em> agir, mais s'il <em>doit</em> le faire, dans quelles conditions, et si cette décision peut être expliquée, vérifiée et annulée si nécessaire.</p>
+      <div class="def-source" style="color: var(--accent3)">— Keyfactor, Digital Trust Digest AI Identity Edition, 2026</div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:2.5rem">Le cadre réglementaire : AI Act européen</h3>
+    <p class="reveal">
+      L'<strong>AI Act européen</strong> impose des obligations strictes sur les systèmes à haut risque : évaluation des risques, surveillance humaine et notification des incidents. Les entreprises doivent démontrer la traçabilité complète des actions des agents. <strong class="hl">Les sanctions peuvent atteindre 35 M€ ou 7% du chiffre d'affaires mondial.</strong> (Aduneo, 2026)
+    </p>
+    <p class="reveal">
+      En parallèle, de nouveaux standards IAM émergent spécifiquement pour les agents IA, comme l'<strong>IAAG (Identity Assertion Authorization Grant)</strong> — connu commercialement sous le nom de Cross App Access (XAA) —, promu par Okta depuis 2025, ou <strong>Entra Agent ID</strong> de Microsoft, annoncé en novembre 2025. (Aduneo, 2026)
+    </p>
+  </div>
+</section>
+
+<!-- SYNTHESE -->
+<section class="section" id="synthese">
+  <div class="section-label reveal">7 — Synthèse</div>
+  <h2 class="reveal">Synthèse & Perspectives</h2>
+
+  <div class="cards-grid reveal">
+    <div class="info-card">
+      <div class="card-icon">🔄</div>
+      <h3>De la réaction à l'action</h3>
+      <p>Le passage vers les workflows agentiques n'est pas une simple amélioration technique, mais une transformation du modèle opérationnel : gains de productivité versus complexité de contrôle. Les entreprises qui réussiront ne seront pas celles qui auront le plus d'agents, mais celles dont les agents fonctionneront vraiment en production.</p>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">🔐</div>
+      <h3>La sécurité comme prérequis</h3>
+      <p>L'adoption massive dépendra de la résolution du défi de la « Non-Human Identity » et de la robustesse des protocoles d'autorisation. Seulement 6% des organisations disposent actuellement de cadres de gouvernance adéquats — un gouffre à combler d'urgence.</p>
+    </div>
+    <div class="info-card">
+      <div class="card-icon">🎯</div>
+      <h3>Le nouveau rôle de l'humain</h3>
+      <p>L'humain n'est plus un exécutant, mais un <strong>Orchestrateur</strong> et un <strong>Garant éthique</strong> via le mécanisme Human-in-the-loop. 2026 marque la naissance d'un nouveau métier : l'architecte d'agents, qui conçoit, gouverne et évalue les systèmes autonomes.</p>
+    </div>
+  </div>
+
+  <div class="problematique reveal" style="margin-top:3rem; border-color: rgba(39,174,96,0.35); background: linear-gradient(135deg, rgba(39,174,96,0.07), rgba(192,57,43,0.05))">
+    <p style="font-size:1rem; font-style:normal">
+      <strong style="color:#1a7a40">Réponse à la problématique :</strong><br><br>
+      Concilier autonomie décisionnelle et impératifs de sécurité passe par une <strong>architecture de gouvernance à trois niveaux</strong> : (1) des garde-fous techniques intégrés dès la conception (sandboxing, least privilege, guardrails), (2) des mécanismes organisationnels de supervision humaine aux points critiques (HITL, kill switch, audit trail), et (3) un cadre réglementaire et d'identité adapté aux agents non-humains (AI Act, IAAG, gestion du cycle de vie des agents). L'autonomie sans gouvernance est un risque systémique ; la gouvernance sans autonomie est une occasion manquée.
+    </p>
+  </div>
+</section>
+
+<!-- METHODOLOGIE -->
+<section class="section-full" id="methodo">
+  <div class="inner">
+    <div class="section-label reveal">Annexe — Méthodologie</div>
+    <h2 class="reveal">Comment j'ai réalisé cette veille</h2>
+
+    <p class="reveal">Cette section constitue l'annexe technique requise par le module MOS 4.4, détaillant les méthodes de travail et les outils utilisés pour cette étude de veille technologique.</p>
+
+    <div class="method-grid reveal">
+      <div class="method-step">
+        <div class="method-num">01</div>
+        <h4>Définition du périmètre</h4>
+        <p>Identification de la problématique centrale à partir du sujet fourni, délimitation du champ de la veille (agents IA d'entreprise, gouvernance, sécurité), et définition du plan de travail en 7 axes.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-num">02</div>
+        <h4>Sources primaires institutionnelles</h4>
+        <p>Consultation des ressources IBM (Think Blog, rapports IBM X-Force 2025, IBM Cost of Data Breach 2025) comme sources de référence technique initiales.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-num">03</div>
+        <h4>Veille par moteurs de recherche</h4>
+        <p>Recherches systématiques sur Google Scholar, Google Actualités, et moteurs spécialisés avec des mots-clés en français et anglais : "agentic AI enterprise", "gouvernance agents IA", "multi-agent systems 2026", "non-human identity", etc.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-num">04</div>
+        <h4>Sources sectorielles & analystes</h4>
+        <p>Collecte de rapports issus de cabinets d'analyse reconnus : Gartner (2025-2026), McKinsey, IDC, Forrester, PwC, Fortune Business Insights. Croisement des données pour valider les chiffres-clés.</p>
+      </div>
+      <div class="method-step">
+        <div class="method-num">05</div>
+        <h4>Médias spécialisés francophones</h4>
+        <p>Lecture de sources spécialisées françaises : CIO-Online, IT for Business, Siècle Digital, HarfangLab, Infos-Entreprises, Avisia, Aduneo — pour une perspective européenne et réglementaire (AI Act).</p>
+      </div>
+      <div class="method-step">
+        <div class="method-num">06</div>
+        <h4>Synthèse et mise en forme</h4>
+        <p>Structuration des informations selon le plan défini, recoupement des sources, identification des tendances convergentes, et rédaction du rapport sous format HTML avec citations et bibliographie complète.</p>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:2.5rem">Outils utilisés</h3>
+    <div class="two-col reveal">
+      <div>
+        <p><strong>Recherche documentaire :</strong> Google Scholar, Google Actualités, IBM Think Blog, Gartner Research, Wikipedia (IA agentique), sites officiels des frameworks (LangChain, CrewAI, AutoGen).</p>
+        <p><strong>Veille en temps réel :</strong> Alertes Google configurées sur les termes "IA agentique", "agentic AI", "multi-agent enterprise", "AI governance 2026".</p>
+      </div>
+      <div>
+        <p><strong>Organisation :</strong> Structuration des sources par thématique, extraction des citations clés, vérification croisée des statistiques entre plusieurs sources indépendantes.</p>
+        <p><strong>Production :</strong> Rédaction du rapport en HTML/CSS avec mise en forme éditoriale, citations sourcées et bibliographie numérotée.</p>
+      </div>
+    </div>
+
+    <div class="def-block reveal" style="margin-top:2rem; border-color: var(--gold)">
+      <p style="font-style:normal; font-size:0.9rem; color:var(--text-muted)">
+        <strong style="color:var(--gold)">Note de l'étudiante :</strong> Cette veille a été présentée en première session comme état d'avancement. Le rapport initial s'appuyait principalement sur les ressources IBM. Cette version complétée intègre des sources additionnelles (Gartner, McKinsey, IDC, Forrester, HarfangLab, Aduneo, MachineLearningMastery, Salesmate, Wikipedia, Infos-Entreprises, Avisia, CIO-Online, Keyfactor, Kiteworks, Drivingeco, Ellisphere) pour constituer un rapport de synthèse complet avec citations et bibliographie exhaustive.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="section" id="sources">
+  <div class="section-label reveal">Bibliographie</div>
+  <h2 class="reveal">Sources & Références</h2>
+
+  <div class="sources-list reveal">
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">IBM — Définition de l'agent IA et du workflow agentique</span>
+        <span style="color:var(--text-muted)">IBM Think Blog · <a href="https://www.ibm.com/think/topics/ai-agents" target="_blank">ibm.com/think/topics/ai-agents</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">IBM — L'IA agentique au service de la sécurité des identités avec IBM Verify Identity Protection</span>
+        <span style="color:var(--text-muted)">IBM · Novembre 2025 · <a href="https://www.ibm.com/fr-fr/new/product-blog/agentic-ai-meets-identity-security-with-ibm-verify-identity-protection" target="_blank">ibm.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">IBM — Cost of a Data Breach Report 2025</span>
+        <span style="color:var(--text-muted)">IBM Security · 2025 · Rapport annuel sur le coût des violations de données</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">IBM — X-Force Threat Intelligence Index 2025</span>
+        <span style="color:var(--text-muted)">IBM Security · 2025 · Rapport sur les vecteurs d'attaque cyber (identité, agents IA)</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Gartner — Prédictions sur l'IA agentique et les systèmes multi-agents 2026</span>
+        <span style="color:var(--text-muted)">Gartner Research · 2025-2026 · Adoption enterprise des agents IA, annulation de 40% des projets agentiques d'ici 2027</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Fortune Business Insights — Marché de l'IA agentique (CAGR 44,8%)</span>
+        <span style="color:var(--text-muted)">Fortune Business Insights · 2025</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Wikipedia — Intelligence artificielle agentique</span>
+        <span style="color:var(--text-muted)">Wikipédia (fr) · Mis à jour 2026 · <a href="https://fr.wikipedia.org/wiki/Intelligence_artificielle_agentique" target="_blank">fr.wikipedia.org</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Salesmate — The future of AI agents: Key trends to watch in 2026</span>
+        <span style="color:var(--text-muted)">Salesmate Blog · 2026 · <a href="https://www.salesmate.io/blog/future-of-ai-agents/" target="_blank">salesmate.io</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">MachineLearningMastery — 7 Agentic AI Trends to Watch in 2026</span>
+        <span style="color:var(--text-muted)">MachineLearningMastery · 5 janvier 2026 · <a href="https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/" target="_blank">machinelearningmastery.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Infos-Entreprises — IA agentique en entreprise : 2026, l'année de l'autonomie</span>
+        <span style="color:var(--text-muted)">Infos Entreprises · 10 février 2026 · <a href="https://infos-entreprises.fr/2026/02/10/ia-agentique-entreprise-2026/" target="_blank">infos-entreprises.fr</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Konverso — What are AI Agents: The 2026 Evolution</span>
+        <span style="color:var(--text-muted)">Konverso (FPT Software) · 2026 · <a href="https://www.konverso.ai/fr/blogs/what-are-ai-agents" target="_blank">konverso.ai</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Beam AI — 7 Enterprise AI Agent Trends Defining 2026</span>
+        <span style="color:var(--text-muted)">Beam AI · 24 janvier 2026 · <a href="https://beam.ai/agentic-insights/enterprise-ai-agent-trends-2026" target="_blank">beam.ai</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Avisia — 2026 : industrialisez et gouvernez vos Agents IA à l'échelle</span>
+        <span style="color:var(--text-muted)">Avisia · 2 février 2026 · <a href="https://www.avisia.fr/actualites/blog/data/ia-agentique-en-2026-comment-industrialiser-et-gouverner-vos-agents-a-lechelle" target="_blank">avisia.fr</a> · Cas L'Oréal France</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">CloudKeeper — Top Agentic AI Trends to Watch in 2026</span>
+        <span style="color:var(--text-muted)">CloudKeeper · 30 janvier 2026 · <a href="https://www.cloudkeeper.com/insights/blog/top-agentic-ai-trends-watch-2026-how-ai-agents-are-redefining-enterprise-automation" target="_blank">cloudkeeper.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">HarfangLab — Intelligence artificielle et cybersécurité : les prédictions 2026</span>
+        <span style="color:var(--text-muted)">HarfangLab · 21 janvier 2026 · <a href="https://harfanglab.io/fr/blog/strategie/intelligence-artificielle-predictions-experts-2026/" target="_blank">harfanglab.io</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Drivingeco — Le plus grand risque en cybersécurité en 2026 : les agents IA</span>
+        <span style="color:var(--text-muted)">Drivingeco · 8 janvier 2026 · <a href="https://www.drivingeco.com/fr/mayor-riesgo-ciberseguridad-2026-no-son-humanos-sino-agentes-ia/" target="_blank">drivingeco.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Aduneo — IA agentique et IAM : les nouveaux défis</span>
+        <span style="color:var(--text-muted)">Aduneo · 5 janvier 2026 · <a href="https://www.aduneo.com/cybersecurite/ia-agentique-et-iam-les-nouveaux-defis" target="_blank">aduneo.com</a> · Standard IAAG, Okta, Microsoft Entra Agent ID, AI Act</span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Keyfactor — Digital Trust Digest : AI Identity Edition</span>
+        <span style="color:var(--text-muted)">Keyfactor · 29 janvier 2026 · <a href="https://www.keyfactor.com/fr/blog/digital-trust-digest-explore-the-ai-identity-edition-shaping-security-in-2026/" target="_blank">keyfactor.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Kiteworks — Crise de la sécurité des données liée à l'IA en 2026</span>
+        <span style="color:var(--text-muted)">Kiteworks · 9 janvier 2026 · <a href="https://www.kiteworks.com/fr/gestion-des-risques-lies-a-la-cybersecurite/crise-securite-donnees-ia-strategies-gouvernance-shadow-ai-2026/" target="_blank">kiteworks.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Ellisphere — Cybersécurité 2026 : IA, identités machines et confiance</span>
+        <span style="color:var(--text-muted)">Ellisphere · 16 décembre 2025 · <a href="https://www.ellisphere.com/cybersecurite-2026-ia-identites-machines-et-confiance/" target="_blank">ellisphere.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">CIO-Online — IA agentique : le futur cauchemar des RSSI ?</span>
+        <span style="color:var(--text-muted)">CIO-Online · 16 janvier 2026 · <a href="https://www.cio-online.com/actualites/lire-ia-agentique-le-futur-cauchemar-des-rssi-16520.html" target="_blank">cio-online.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">IT for Business — Récap IA IT for Business : 2025 l'année des agents</span>
+        <span style="color:var(--text-muted)">IT for Business · 2 janvier 2026 · <a href="https://www.itforbusiness.fr/ia-entreprise-2025-agents-ai-act-securite-2026-98793" target="_blank">itforbusiness.fr</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Siècle Digital — Cybersécurité 2026 : basculement vers les agents IA autonomes</span>
+        <span style="color:var(--text-muted)">Siècle Digital · 30 décembre 2025 · <a href="https://siecledigital.fr/2025/12/30/cybersecurite-et-ia-ce-qui-attend-vraiment-les-entreprises-en-2026/" target="_blank">siecledigital.fr</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">Switas — L'ère de l'agentique : 7 avancées majeures en IA qui redéfiniront 2026</span>
+        <span style="color:var(--text-muted)">Switas Consultancy · 2026 · <a href="https://www.switas.com/fr/articles/the-agentic-era-7-ai-breakthroughs-reshaping-2026" target="_blank">switas.com</a></span>
+      </div>
+    </div>
+
+    <div class="source-item">
+      <div>
+        <span class="src-title">OpenPR — Gartner's 2026 Multi-Agent Systems Boom</span>
+        <span style="color:var(--text-muted)">OpenPR (communiqué Gartner) · 2026 · <a href="https://www.openpr.com/news/4447249/gartner-s-2026-multi-agent-systems-boom-why-enterprises-need" target="_blank">openpr.com</a></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Wissal EL ARABIOU · Option INFO · MOS 4.4 — Nouvelles Technologies de l'Information et de la Communication · 2025–2026</p>
+  <p style="margin-top:0.5rem; color: rgba(136,146,176,0.4)">Rapport de Veille Technologique — Vers l'Entreprise Agentique</p>
+</footer>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
