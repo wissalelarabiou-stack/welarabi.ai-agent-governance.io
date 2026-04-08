@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vers l'Entreprise Agentique, Veille Technologique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   PALETTE - Thème clair (inspiration figure 1)
+   Accent 1 : #0ea5e9  (bleu ciel)
+   Accent 2 : #7c3aed  (violet)
+   Fond     : #f8f9ff
+   Carte    : #ffffff
+   Texte    : #1e1b4b
+══════════════════════════════════════════ */
+:root {
+  --bg:          #f0f2fa;
+  --bg2:         #e8eaf6;
+  --card:        #ffffff;
+  --card2:       #f4f5ff;
+  --blue:        #0ea5e9;
+  --violet:      #7c3aed;
+  --blue-dim:    #2563eb;
+  --violet-dim:  #6d28d9;
+  --border:      rgba(14,165,233,0.18);
+  --border2:     rgba(124,58,237,0.18);
+  --text:        #1e1b4b;
+  --text-muted:  #4c5080;
+  --text-dim:    #8890b8;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'EB Garamond', Georgia, serif;
+  line-height: 1.78;
+  color: var(--text);
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 0%, rgba(14,165,233,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 100%, rgba(124,58,237,0.06) 0%, transparent 55%);
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: rgba(14,165,233,0.3); border-radius: 3px; }
+
+/* ══ HEADER ══ */
+.site-header {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid transparent;
+  background-clip: padding-box;
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 16px rgba(14,165,233,0.1);
+  border-bottom: 1px solid var(--border);
+}
+.site-header-inner {
+  max-width: 1140px; margin: 0 auto;
+  padding: 0.85rem 2rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.site-logo { display: flex; align-items: center; gap: 0.7rem; }
+.logo-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue-dim);
+}
+.site-nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.site-nav a {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--text-muted);
+  text-decoration: none; transition: color 0.2s; white-space: nowrap;
+}
+.site-nav a:hover { color: var(--blue); }
+
+/* ══ HERO ══ */
+.hero {
+  background: linear-gradient(140deg, #0f172a 0%, #1e1b4b 40%, #312e81 80%, #4c1d95 100%);
+  padding: 5rem 2rem 4.5rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 25% 60%, rgba(14,165,233,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 30%, rgba(124,58,237,0.14) 0%, transparent 50%);
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.64rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.22em;
+  color: rgba(147,210,255,0.8);
+  border: 1px solid rgba(147,210,255,0.3);
+  background: rgba(14,165,233,0.1);
+  padding: 0.22rem 1.1rem; border-radius: 20px;
+  margin-bottom: 1.5rem; position: relative; z-index: 1;
+}
+.hero h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700; line-height: 1.15;
+  color: #fff; margin-bottom: 1rem;
+  position: relative; z-index: 1;
+}
+.hero h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, #7dd3fc 0%, #c4b5fd 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.98rem; color: rgba(199,210,254,0.75);
+  max-width: 580px; margin: 0 auto;
+  position: relative; z-index: 1; line-height: 1.6;
+}
+
+/* ══ PAGE LAYOUT ══ */
+.page-wrap {
+  max-width: 1140px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 230px;
+  gap: 2.5rem;
+  padding: 2.5rem 2rem 5rem;
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .page-wrap { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+
+/* ══ ARTICLE ══ */
+.article {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2.8rem 3rem;
+  box-shadow: 0 4px 30px rgba(14,165,233,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  min-width: 0; order: 1;
+}
+@media (max-width: 820px) { .article { padding: 1.8rem 1.4rem; } }
+
+/* ══ SIDEBAR ══ */
+.sidebar {
+  order: 2;
+  position: sticky; top: 76px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem 1.3rem;
+  box-shadow: 0 2px 12px rgba(14,165,233,0.06);
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+}
+.sidebar-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.63rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: var(--blue-dim); margin-bottom: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+.toc { list-style: none; }
+.toc li { font-family: 'Source Sans 3', sans-serif; font-size: 0.74rem; padding: 0.2rem 0; }
+.toc li.h1 { font-weight: 600; margin-top: 0.45rem; color: var(--text); }
+.toc li.h2 { padding-left: 0.85rem; color: var(--text-muted); font-size: 0.7rem; }
+.toc a { text-decoration: none; color: inherit; transition: color 0.15s; display: block; }
+.toc a:hover { color: var(--blue); }
+
+/* ══ HEADINGS ══ */
+h1.sh1 {
+  font-family: 'EB Garamond', serif; font-size: 1.6rem; font-weight: 700;
+  margin: 2.8rem 0 1rem; padding-bottom: 0.45rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border2);
+  position: relative;
+}
+h1.sh1::before {
+  content: '';
+  position: absolute; bottom: -1px; left: 0;
+  width: 3rem; height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--violet));
+  border-radius: 1px;
+}
+h1.sh1:first-child { margin-top: 0; }
+h2.sh2 {
+  font-family: 'EB Garamond', serif; font-size: 1.12rem; font-weight: 700;
+  margin: 2rem 0 0.65rem; color: var(--blue-dim);
+}
+
+/* ══ BODY TEXT ══ */
+p {
+  margin-bottom: 0.95rem; text-align: justify;
+  hyphens: auto; font-size: 0.97rem; line-height: 1.78; color: var(--text);
+}
+p + p { text-indent: 1.2em; }
+h1+p, h2+p, .sh1+p, .sh2+p,
+.stat-band+p, .def-box+p, .info-note+p,
+.data-table+p, .phase-table+p,
+.fig-block+p, ul+p, ol+p { text-indent: 0; }
+
+em { color: var(--violet-dim); font-style: italic; }
+strong { color: var(--text); }
+
+/* ══ CITATION REFS ══ */
+sup.ref { display: inline; }
+.ref-link {
+  color: var(--blue-dim); font-weight: 700; font-size: 0.7rem;
+  text-decoration: none; transition: color 0.15s;
+}
+.ref-link:hover { color: var(--violet); text-decoration: underline; }
+
+/* ══ DEF BOX ══ */
+.def-box {
+  border-left: 3px solid var(--blue);
+  padding: 0.85rem 1.2rem;
+  margin: 1.3rem 0 1.3rem 0.8em;
+  background: rgba(14,165,233,0.04);
+  font-size: 0.97rem;
+}
+.def-box cite { display: block; margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+
+/* ══ INFO NOTE ══ */
+.info-note {
+  background: rgba(124,58,237,0.05);
+  border: 1px solid rgba(124,58,237,0.18);
+  border-left: 3px solid var(--violet);
+  padding: 0.9rem 1.15rem; margin: 1.3rem 0;
+  font-size: 0.87rem; font-family: 'Source Sans 3', sans-serif;
+  color: var(--text); border-radius: 0 4px 4px 0;
+}
+.info-note strong { color: var(--violet-dim); font-weight: 600; }
+
+/* ══ STATS BAND ══ */
+.stat-band {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--border2); margin: 1.5rem 0;
+  border-radius: 8px; overflow: hidden;
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--card2);
+}
+.stat-cell { padding: 1.2rem 1rem; border-right: 1px solid var(--border); text-align: center; }
+.stat-cell:last-child { border-right: none; }
+.stat-val {
+  font-family: 'EB Garamond', serif; font-size: 2rem; font-weight: 700;
+  display: block; line-height: 1.1;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-lbl { font-size: 0.71rem; color: var(--text-muted); line-height: 1.35; display: block; margin-top: 0.28rem; }
+.stat-src { font-size: 0.61rem; color: var(--text-dim); font-style: italic; display: block; margin-top: 0.25rem; }
+@media (max-width: 600px) {
+  .stat-band { grid-template-columns: 1fr; }
+  .stat-cell { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* ══ FIGURE ══ */
+.fig-block { margin: 1.8rem 0; text-align: center; }
+.fig-block img {
+  max-width: 400px; width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(14,165,233,0.15), 0 1px 4px rgba(124,58,237,0.1);
+  display: block; margin: 0 auto;
+  border: 1px solid var(--border);
+}
+.fig-cap {
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.77rem;
+  color: var(--text-muted); margin-top: 0.6rem; font-style: italic;
+}
+.fig-cap strong { font-style: normal; color: var(--text); font-weight: 600; }
+
+/* ══ TABLES ══ */
+.data-table {
+  width: 100%; border-collapse: collapse; margin: 1.3rem 0;
+  font-size: 0.83rem; font-family: 'Source Sans 3', sans-serif;
+}
+.data-table th {
+  background: linear-gradient(90deg, rgba(14,165,233,0.12), rgba(124,58,237,0.1));
+  color: var(--blue-dim); padding: 0.58rem 0.9rem;
+  text-align: left; font-weight: 600; font-size: 0.77rem; letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td { padding: 0.52rem 0.9rem; border-bottom: 1px solid #f0eeff; vertical-align: top; color: var(--text); }
+.data-table tr:nth-child(even) td { background: var(--card2); }
+.data-table tr:hover td { background: rgba(14,165,233,0.04); }
+.data-table caption { font-size: 0.76rem; color: var(--text-muted); font-style: italic; text-align: left; padding: 0.3rem 0; caption-side: bottom; }
+
+.phase-table {
+  width: 100%; border-collapse: collapse; margin: 1.3rem 0;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.83rem;
+}
+.phase-table th {
+  background: linear-gradient(90deg, rgba(14,165,233,0.14), rgba(124,58,237,0.12));
+  color: var(--text); padding: 0.58rem 1rem; text-align: left; font-weight: 600;
+  border-bottom: 1px solid var(--border2);
+}
+.phase-table td { padding: 0.62rem 1rem; border-bottom: 1px solid #f0eeff; vertical-align: top; color: var(--text); }
+.phase-table tr:nth-child(even) td { background: var(--card2); }
+.phase-table tr:hover td { background: rgba(124,58,237,0.04); }
+.phase-num { font-family: 'EB Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--blue); }
+
+/* ══ LISTS ══ */
+ul.rlist, ol.rlist { padding-left: 1.6rem; margin: 0.8rem 0; font-size: 0.95rem; color: var(--text); }
+ul.rlist li, ol.rlist li { margin-bottom: 0.5rem; }
+
+/* ══ BIBLIOGRAPHY ══ */
+.biblio { list-style: none; counter-reset: bib; }
+.biblio li {
+  counter-increment: bib;
+  display: flex; gap: 0.75rem;
+  padding: 0.6rem 0; border-bottom: 1px solid #f0eeff;
+  font-size: 0.84rem; font-family: 'Source Sans 3', sans-serif;
+  align-items: flex-start; scroll-margin-top: 90px; color: var(--text);
+}
+.biblio li::before {
+  content: "[" counter(bib) "]";
+  color: var(--blue-dim); font-weight: 700; flex-shrink: 0;
+  min-width: 2.3rem; font-size: 0.79rem; padding-top: 0.06rem;
+  font-family: 'Source Code Pro', monospace;
+}
+.biblio li a { color: var(--blue-dim); word-break: break-all; text-decoration: none; }
+.biblio li a:hover { color: var(--violet); text-decoration: underline; }
+
+/* ══ COLOPHON (infos fin de doc) ══ */
+.colophon-card {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 1.4rem 1.8rem;
+  margin-top: 1rem;
+}
+.colophon-row {
+  display: flex; flex-wrap: wrap; gap: 1.5rem 3rem;
+}
+.colophon-item {
+  display: flex; flex-direction: column; gap: 0.15rem;
+}
+.colophon-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.62rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--blue-dim);
+}
+.colophon-value {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.88rem; color: var(--text);
+}
+
+/* ══ FOOTER ══ */
+.site-footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 1.5rem 2rem;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+hr.thin { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-logo">
+           <div class="logo-text">Centrale Lyon &ndash; MOS 04 4</div>
+    </div>
+    <nav class="site-nav">
+      <a href="#s1">Introduction</a>
+      <a href="#s2">Fondements</a>
+      <a href="#s3">Architecture</a>
+      <a href="#s4">Déploiement</a>
+      <a href="#s5">Sécurité</a>
+      <a href="#s6">Gouvernance</a>
+      <a href="#s7">Synthèse</a>
+      <a href="#s9">Bibliographie</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-tag">Veille Technologique &middot; Option INFO &middot; 2025-2026</div>
+  <h1>Vers l&rsquo;<em>Entreprise Agentique</em></h1>
+  <p class="hero-sub">Stratégies de déploiement et défis de gouvernance des systèmes multi-agents autonomes</p>
+</section>
+
+<!-- ══════════ LAYOUT ══════════ -->
+<div class="page-wrap">
+
+  <main class="article">
+
+
+
+
+<!-- ── 1. Introduction ── -->
+
+<h1 class="sh1" id="s1">1 &nbsp; Introduction</h1>
+
+<h2 class="sh2" id="s1-1">1.1 &nbsp; Contexte et enjeux</h2>
+
+<p>L'intelligence artificielle connaît depuis 2022 une transformation sans précédent, portée par la démocratisation des grands modèles de langage (LLM). En 2025–2026, le paradigme évolue de l'IA générative <em>passive</em>, qui se contente de répondre à une invite humaine, vers l'<strong>IA agentique</strong>, active et autonome, capable d'enchaîner des tâches sans intervention humaine constante. En 2026, le Conseil français de l'IA et du numérique consacre ce terme en lui préférant celui d'« IA agentique » à « agents IA », pour souligner que « l'intervention de systèmes agentiques n'exclut en rien des interventions humaines, bien au contraire ».<sup class="ref"><a href="#ref-1" class="ref-link">[1]</a></sup></p>
+
+<p>L'enjeu économique est considérable. Selon Gartner, 2026 est l'année des agents IA ; 40 % des applications d'entreprise devaient en intégrer d'ici la fin de l'année, contre moins de 5 % en 2025.<sup class="ref"><a href="#ref-2" class="ref-link">[2]</a></sup> Pour Deloitte, qui a interrogé 1 854 dirigeants à travers l'Europe et le Moyen-Orient, l'accès des collaborateurs à l'IA a augmenté de 50 % en 2025, et le nombre d'entreprises ayant une part significative de projets IA en production devrait doubler.<sup class="ref"><a href="#ref-3" class="ref-link">[3]</a></sup></p>
+
+<div class="stat-band">
+  <div class="stat-cell">
+    <span class="stat-val">$52 Md</span>
+    <span class="stat-lbl">Valeur projetée du marché des agents IA d'ici 2030</span>
+    <span class="stat-src">IDC / Salesmate, 2026</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-val">88 %</span>
+    <span class="stat-lbl">Des organisations utilisent l'IA dans au moins une fonction</span>
+    <span class="stat-src">McKinsey, State of AI, 2025</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-val">17 %</span>
+    <span class="stat-lbl">De la valeur IA totale générée par les agents en 2025, attendus à 29 % en 2028</span>
+    <span class="stat-src">BCG, 2025</span>
+  </div>
+</div>
+
+<p>Malgré cet élan, McKinsey note que si 62 % des organisations expérimentent les agents, moins de 10 % les déploient à l'échelle dans une fonction donnée.<sup class="ref"><a href="#ref-4" class="ref-link">[4]</a></sup> Le BCG est plus prescriptif : 60 % des entreprises ne génèrent aucune valeur matérielle malgré leurs investissements, et seules 5 % créent de la valeur substantielle à grande échelle.<sup class="ref"><a href="#ref-5" class="ref-link">[5]</a></sup></p>
+
+<h2 class="sh2" id="s1-3">1.2 &nbsp; Objectifs et problématique</h2>
+
+<p>Cette veille vise à cartographier les technologies, architectures, stratégies de déploiement, risques et cadres de gouvernance de l'IA agentique en entreprise. La problématique centrale est la suivante :</p>
+
+<div class="def-box">
+  Comment concilier l'autonomie décisionnelle des agents IA avec les impératifs de sécurité des données et de contrôle managérial ?
+</div>
+
+
+<!-- ── 2. Fondements ── -->
+
+<h1 class="sh1" id="s2">2 &nbsp; Fondements de l'IA agentique</h1>
+
+<h2 class="sh2" id="s2-1">2.1 &nbsp; Définition et niveaux d'autonomie</h2>
+
+<p>WEnvision résume bien la rupture conceptuelle : « une entreprise agentique n'est pas une entreprise qui utilise des agents IA. C'est une entreprise dont le système d'information est devenu conversationnel : chaque agent sait qui elle est, ce qu'elle fait, et comment elle décide ».<sup class="ref"><a href="#ref-8" class="ref-link">[8]</a></sup> L'agent ne répond pas à une question, il résout un problème dans son contexte réel et modifie l'état du SI.</p>
+
+<p>Le Conseil français de l'IA et du numérique, début 2026, a décrit une échelle à cinq niveaux d'autonomie pour les IA agentiques<sup class="ref"><a href="#ref-1" class="ref-link">[1]</a></sup> :</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Niveau</th><th>Désignation</th><th>Description</th><th>Exemple</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td>Automatisation basique</td><td>Application de règles fixes, tâches répétitives</td><td>RPA classique</td></tr>
+    <tr><td><strong>2</strong></td><td>Assistance augmentée</td><td>Suggestions à l'humain qui valide</td><td>Copilotes IA</td></tr>
+    <tr><td><strong>3</strong></td><td>Autonomie supervisée</td><td>Décision autonome sur des tâches bornées</td><td>Agent service client</td></tr>
+    <tr><td><strong>4</strong></td><td>Collaboration multi-agents</td><td>Agents qui se coordonnent et délèguent</td><td>Contrôleur financier IA</td></tr>
+    <tr><td><strong>5</strong></td><td>Autonomie organisationnelle</td><td>Pilotage de processus entiers sans humain</td><td>Usine agentique</td></tr>
+  </tbody>
+  <caption>Tableau 1, Échelle d'autonomie des systèmes d'IA agentique (Conseil français de l'IA et du numérique, 2026)</caption>
+</table>
+
+<h2 class="sh2" id="s2-2">2.2 &nbsp; Le workflow agentique</h2>
+
+<p>Dans un workflow agentique, l'objectif est défini une fois et le système s'organise de façon autonome pour y répondre. McKinsey insiste sur ce point : « il est impossible de repenser les flux de travail, le levier de valeur n° 1, si chaque étape doit être orchestrée par des humains ».<sup class="ref"><a href="#ref-9" class="ref-link">[9]</a></sup> Les agents permettent une automatisation de bout en bout, mais leur déploiement exige des cadres de gouvernance que la plupart des organisations n'ont pas encore mis en place.</p>
+
+<div class="fig-block">
+  <img src="data:image/png;base64,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" alt="Boucle de raisonnement d'un agent IA autonome" style="max-width:100%;border-radius:10px;display:block;margin:0 auto;">
+  <div class="fig-cap"><strong>Figure 1</strong> &ndash; Boucle de raisonnement d'un agent IA autonome</div>
+</div>
+
+
+<p>Les résultats mesurés par les entreprises pionnières sont significatifs : Microsoft AI (MAI-DxO) a atteint 85,5 % de précision dans la résolution de cas médicaux complexes, contre 20 % en moyenne pour les médecins expérimentés.<sup class="ref"><a href="#ref-10" class="ref-link">[10]</a></sup> Moderna a réduit le temps de développement de ses profils produits de plusieurs semaines à quelques heures grâce aux agents de R&D.<sup class="ref"><a href="#ref-4" class="ref-link">[4]</a></sup></p>
+
+
+<!-- ── 3. Architecture ── -->
+
+<h1 class="sh1" id="s3">3 &nbsp; Architecture des systèmes multi-agents</h1>
+
+<p>Gartner a enregistré une hausse de <strong>1 445 %</strong> des demandes d'information sur les systèmes multi-agents entre le premier trimestre 2024 et le deuxième trimestre 2025.<sup class="ref"><a href="#ref-11" class="ref-link">[11]</a></sup> Comme les applications monolithiques ont cédé la place aux microservices, « les agents généralistes uniques laissent place à des équipes orchestrées d'agents spécialisés ».<sup class="ref"><a href="#ref-11" class="ref-link">[11]</a></sup></p>
+
+<h2 class="sh2" id="s3-1">3.1 &nbsp; Modèles d'orchestration</h2>
+
+<p>Deux modèles d'orchestration coexistent. L'<strong>orchestration verticale</strong> repose sur un agent superviseur qui décompose l'objectif et délègue à des agents spécialisés. C'est le modèle illustré par le cas L'Oréal France, où un « agent Pdp Writer orchestre des échanges avec un agent Brand DNA, un agent Amazon Knowledge et un agent Legal ».<sup class="ref"><a href="#ref-12" class="ref-link">[12]</a></sup> L'objectif : passer de 8 agents déployés en 2025 à plus de 20 agents majeurs en 2026.</p>
+
+<p>L'<strong>orchestration horizontale</strong> (modèle collaboratif) repose sur des agents autonomes qui négocient entre eux sans chef unique. Deloitte distingue en outre un « spectre d'autonomie » progressif en trois positions : <em>humain dans la boucle</em> (HITL), <em>humain supervisant la boucle</em>, et <em>humain hors de la boucle</em>, chacune adaptée à la criticité et la prévisibilité des tâches.<sup class="ref"><a href="#ref-13" class="ref-link">[13]</a></sup></p>
+
+<h2 class="sh2" id="s3-2">3.2 &nbsp; Protocoles et frameworks</h2>
+
+<p>Plusieurs protocoles standardisent les échanges inter-agents. Le <strong>Model Context Protocol (MCP)</strong> d'Anthropic permet de connecter les agents aux données et outils de l'entreprise. Le protocole <strong>Agent-to-Agent (A2A)</strong> de Google standardise la découverte et la délégation entre agents. Fabien Pasquet, Lead Développeur IA chez Eleven Labs, précise que l'architecture doit intégrer quatre briques : le LLM de raisonnement, la couche de mémoire (Mem0, MemGPT), les outils et APIs, et la couche d'orchestration.<sup class="ref"><a href="#ref-14" class="ref-link">[14]</a></sup></p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Framework</th><th>Approche</th><th>Points forts</th><th>Cas d'usage idéal</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>CrewAI</strong></td><td>Rôles</td><td>Facilité d'usage élevée, séquencement clair</td><td>Processus hiérarchiques séquentiels</td></tr>
+    <tr><td><strong>LangGraph</strong></td><td>Graphe d'états</td><td>Contrôle granulaire, HITL natif</td><td>Workflows complexes, validation obligatoire</td></tr>
+    <tr><td><strong>AutoGen</strong></td><td>Conversationnel</td><td>Dialogue multi-agents, prototypage rapide</td><td>Génération de code, R&D</td></tr>
+  </tbody>
+  <caption>Tableau 2, Comparaison des principaux frameworks d'agents IA</caption>
+</table>
+
+
+<!-- ── 4. Stratégies de déploiement ── -->
+
+<h1 class="sh1" id="s4">4 &nbsp; Stratégies de déploiement</h1>
+
+<p>Le passage du PoC (preuve de concept) à la production industrielle est l'enjeu central de 2026. Deloitte l'exprime clairement : l'intégration de l'IA est « comparable à la transition de la vapeur à l'électricité. Lorsque les usines ont reconfigué leurs lignes de production, les bénéfices réels n'ont apparu que lorsque les organisations ont radicalement transformé leur mode de fonctionnement ».<sup class="ref"><a href="#ref-15" class="ref-link">[15]</a></sup></p>
+
+<h2 class="sh2" id="s4-1">4.1 &nbsp; Les phases d'adoption</h2>
+
+<p>L'analyse croisée de Deloitte<sup class="ref"><a href="#ref-3" class="ref-link">[3]</a><a href="#ref-13" class="ref-link">[13]</a><a href="#ref-15" class="ref-link">[15]</a></sup>, McKinsey<sup class="ref"><a href="#ref-4" class="ref-link">[4]</a><a href="#ref-9" class="ref-link">[9]</a></sup> et du BCG<sup class="ref"><a href="#ref-5" class="ref-link">[5]</a></sup> permet d'identifier quatre phases successives de déploiement de l'IA agentique.</p>
+
+<table class="phase-table">
+  <thead>
+    <tr>
+      <th>Phase</th>
+      <th>Dénomination</th>
+      <th>Caractéristiques</th>
+      <th>Horizon temporel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="phase-num">1</span></td>
+      <td><strong>Exploration</strong></td>
+      <td>Identification des cas d'usage. PoC mono-agent sur des tâches délimitées. Mesure de faisabilité technique et de valeur métier. Équipe restreinte.</td>
+      <td>1–3 mois</td>
+    </tr>
+    <tr>
+      <td><span class="phase-num">2</span></td>
+      <td><strong>Pilote</strong></td>
+      <td>Déploiement en environnement réel mais borné (une fonction, un département). Mise en place du socle : données, infrastructure, gouvernance de base. Human-in-the-loop systématique.</td>
+      <td>3–6 mois</td>
+    </tr>
+    <tr>
+      <td><span class="phase-num">3</span></td>
+      <td><strong>Industrialisation</strong></td>
+      <td>Passage à l'échelle sur plusieurs fonctions. Orchestration multi-agents. Cadre de gouvernance et de sécurité formalisé. Tableaux de bord de télémétrie. Mesure du ROI.</td>
+      <td>6–18 mois</td>
+    </tr>
+    <tr>
+      <td><span class="phase-num">4</span></td>
+      <td><strong>Transformation organisationnelle</strong></td>
+      <td>Refonte profonde des processus autour des agents. Nouveaux rôles (architecte d'agents, superviseur d'agents). Modèle d'exploitation AI-first. Gouvernance maturée.</td>
+      <td>18 mois et +</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Pour Deloitte, la plupart des entreprises se situent actuellement entre les phases 1 et 2 : 80 % estiment disposer de capacités matures pour l'automatisation de base, mais seulement 28 % pour les initiatives combinant automatisation et agents IA.<sup class="ref"><a href="#ref-13" class="ref-link">[13]</a></sup></p>
+
+<div class="info-note">
+  <strong>Point d'attention —</strong> Gartner estime que plus de 40 % des projets d'IA agentique seront abandonnés d'ici 2027, en raison de coûts imprévus, de difficultés de passage à l'échelle ou de risques non anticipés.<sup class="ref"><a href="#ref-13" class="ref-link">[13]</a></sup> Les entreprises qui réussissent sont celles qui traitent l'intégration comme un problème de leadership et de modèle opérationnel, pas comme un problème technologique.<sup class="ref"><a href="#ref-9" class="ref-link">[9]</a></sup>
+</div>
+
+<h2 class="sh2" id="s4-2">4.2 &nbsp; Prérequis techniques et organisationnels</h2>
+
+<p>Infos-Entreprises résume le problème fondamental : « sans données propres, l'agent est aveugle ou dangereux. L'architecture SI doit être impeccable pour nourrir ces systèmes. On ne construit pas d'autonomie sur des sables mouvants ».<sup class="ref"><a href="#ref-16" class="ref-link">[16]</a></sup> Plusieurs conditions préalables sont nécessaires.</p>
+
+<p><strong>Sur le plan technique</strong>, Eleven Labs identifie quatre prérequis architecturaux : la qualité et l'accessibilité des données (<em>data readiness</em>), une couche d'orchestration unifiée capable de gérer plusieurs agents sur différents langages et protocoles, une infrastructure supportant la faible latence, et un socle d'observabilité en temps réel.<sup class="ref"><a href="#ref-14" class="ref-link">[14]</a></sup></p>
+
+<p><strong>Sur le plan organisationnel</strong>, les obstacles sont tout aussi importants. L'étude AI Pulse de KPMG (T4 2025) relève que 42 % des organisations ont déployé au moins quelques agents, contre seulement 11 % deux trimestres plus tôt, mais que les mécanismes de supervision ne suivent pas : seule une entreprise sur cinq dispose d'un modèle mature de gouvernance.<sup class="ref"><a href="#ref-17" class="ref-link">[17]</a></sup> Par ailleurs, 84 % des directeurs des ressources humaines prévoient de renforcer les compétences de leurs employés en matière d'IA, Capgemini a consacré en moyenne 97 heures de formation par employé en 2025, contre un objectif de 70 heures.<sup class="ref"><a href="#ref-18" class="ref-link">[18]</a></sup></p>
+
+<p><strong>Sur le plan de la sélection des cas d'usage</strong>, McKinsey et BCG convergent : la valeur est concentrée sur quelques fonctions, marketing et ventes, supply chain, développement produit, finance et IT représentent 70 % de la valeur IA générée selon le BCG.<sup class="ref"><a href="#ref-5" class="ref-link">[5]</a></sup> Une compagnie aérienne utilise des agents pour gérer les transactions courantes (reprogrammation de vols, reroutage de bagages), libérant les conseillers pour les cas complexes. Un industriel s'appuie sur des agents pour arbitrer entre coûts et time-to-market dans le développement de nouveaux produits.<sup class="ref"><a href="#ref-3" class="ref-link">[3]</a></sup></p>
+
+<h2 class="sh2" id="s4-3">4.3 &nbsp; Mesure du ROI et horizon de retour sur investissement</h2>
+
+<p>La mesure du ROI de l'IA agentique est un défi spécifique. Deloitte note que la plupart des répondants indiquent qu'il faut entre deux et quatre ans pour obtenir un retour sur investissement satisfaisant pour un cas d'usage IA, nettement plus long que les sept à douze mois habituels pour les technologies classiques.<sup class="ref"><a href="#ref-15" class="ref-link">[15]</a></sup> Cette distinction reflète la profondeur de la transformation requise.</p>
+
+<p>Deloitte distingue deux temporalités distinctes : la GenAI offre des gains de productivité mesurables à court terme, tandis que l'IA agentique « se projette sur un horizon plus long, orienté vers la transformation organisationnelle et la délégation partielle de la prise de décision ».<sup class="ref"><a href="#ref-15" class="ref-link">[15]</a></sup> Cette distinction conduit de nombreux DAF à mesurer le ROI des deux approches séparément, signe d'une maturité croissante des directions IA.</p>
+
+<p>Sur le plan des gains concrets déjà mesurés, PwC relève dans son Global AI Jobs Barometer 2025 que l'IA est associée à une multiplication par quatre de la croissance de la productivité dans les secteurs les plus exposés.<sup class="ref"><a href="#ref-18" class="ref-link">[18]</a></sup> Les agents de développement logiciel illustrent cette efficacité : sur le benchmark SWE-bench, les performances sont passées de 4,4 % de réussite en 2023 à plus de 71 % en 2024.<sup class="ref"><a href="#ref-4" class="ref-link">[4]</a></sup></p>
+
+
+<!-- ── 5. Risques ── -->
+
+<h1 class="sh1" id="s5">5 &nbsp; Risques opérationnels et défis de sécurité</h1>
+
+<h2 class="sh2" id="s5-1">5.1 &nbsp; Risques opérationnels</h2>
+
+<p>Les risques opérationnels ne sont pas seulement techniques : les modèles actuels peuvent produire des informations inexactes (hallucinations) et reproduire des biais. Si les agents sont cantonnés à un rôle d'assistant, ces limites sont déjà problématiques. Elles deviennent critiques lorsqu'elles concernent des systèmes capables d'exécuter des commandes système, de manipuler des fichiers ou d'envoyer des requêtes réseau.<sup class="ref"><a href="#ref-6" class="ref-link">[6]</a></sup></p>
+
+<ul class="rlist">
+  <li><strong>Hallucinations actives.</strong> Un agent peut prendre une décision basée sur une information inventée et l'exécuter dans le monde réel, sans filtre humain intermédiaire.</li>
+  <li><strong>Boucles infinies.</strong> Sans mécanismes de terminaison, un agent peut tourner en boucle et générer des coûts d'API incontrôlés.</li>
+  <li><strong>Dérive du modèle.</strong> Le comportement de l'agent peut s'écarter imperceptiblement des workflows planifiés, sans déclenchement d'alerte.</li>
+  <li><strong>Latence de raisonnement.</strong> Les raisonnements complexes créent des goulots d'étranglement qui rendent le système imprévisible pour des processus temps réel.</li>
+</ul>
+
+<h2 class="sh2" id="s5-2">5.2 &nbsp; L'OWASP Top 10 pour les agents LLM</h2>
+
+<p>L'OWASP Gen AI Security Project a publié en 2025 un référentiel spécifique aux risques des agents LLM, mis à jour pour refléter les déploiements réels. Comme le note DCOD, « là où la sécurité des LLM se concentrait sur les entrées et sorties textuelles, la sécurité agentique doit verrouiller la logique d'action et la mémoire persistante ».<sup class="ref"><a href="#ref-19" class="ref-link">[19]</a></sup></p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Rang</th><th>Risque</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>LLM01</strong></td><td>Prompt Injection</td><td>Des entrées malveillantes détournent les instructions de l'agent. Risque n°1 pour la deuxième édition consécutive selon l'OWASP.<sup class="ref"><a href="#ref-20" class="ref-link">[20]</a></sup></td></tr>
+    <tr><td><strong>LLM02</strong></td><td>Divulgation d'informations sensibles</td><td>L'agent expose des données confidentielles (PII, clés API) via ses réponses.</td></tr>
+    <tr><td><strong>LLM06</strong></td><td>Excessive Agency</td><td>L'agent dispose d'accès ou de permissions supérieurs à ce que sa tâche requiert.</td></tr>
+    <tr><td><strong>LLM07</strong></td><td>Fuite du prompt système</td><td>Des attaquants extraient les instructions internes (règles métier, permissions).</td></tr>
+    <tr><td><strong>NEW</strong></td><td>Goal Hijacking</td><td>Des instructions cachées transforment l'agent en outil d'exfiltration silencieux.<sup class="ref"><a href="#ref-19" class="ref-link">[19]</a></sup></td></tr>
+    <tr><td><strong>NEW</strong></td><td>Empoisonnement de la mémoire</td><td>Un agent corrompu conserve des instructions malveillantes persistant entre sessions.<sup class="ref"><a href="#ref-19" class="ref-link">[19]</a></sup></td></tr>
+  </tbody>
+  <caption>Tableau 3, Sélection des risques OWASP Top 10 LLM 2025 applicables aux agents IA</caption>
+</table>
+
+<p>L'OWASP recommande en particulier le principe du moindre privilège pour les agents : « restreindre les permissions de l'agent à exactement ce que chaque tâche requiert, et exiger l'approbation humaine pour les actions à conséquences ».<sup class="ref"><a href="#ref-20" class="ref-link">[20]</a></sup></p>
+
+<h2 class="sh2" id="s5-3">5.3 &nbsp; La crise de l'identité non-humaine</h2>
+
+<p>HarfangLab prévient que « les identités non-humaines, clés API, tokens, agents IA, dépasseront de loin en nombre les identités humaines en 2026 ».<sup class="ref"><a href="#ref-21" class="ref-link">[21]</a></sup> Des agents IA autonomes seront en mesure de générer leurs propres identités et de s'auto-attribuer des privilèges, ce qui rendra les investigations pour attribuer l'origine des incidents encore plus complexes.</p>
+
+<p>Siècle Digital résume l'enjeu de cybersécurité : « un agent compromis est bien plus dangereux qu'un employé dont le compte a été piraté. Le premier ne souffre pas des mêmes limitations physiques ni des mêmes délais de réponse, ce qui lui permet d'exploiter les données à la vitesse de la machine ».<sup class="ref"><a href="#ref-22" class="ref-link">[22]</a></sup> Seulement 6 % des organisations disposent de cadres de gouvernance adéquats pour superviser leurs agents IA.<sup class="ref"><a href="#ref-22" class="ref-link">[22]</a></sup></p>
+
+
+<!-- ── 6. Gouvernance ── -->
+
+<h1 class="sh1" id="s6">6 &nbsp; Gouvernance et cadre réglementaire</h1>
+
+<p>Delphine Nain Zurkiya, senior partner chez McKinsey Boston, formule l'enjeu de gouvernance : « à mesure que ces systèmes gagnent en autonomie, nous aurons besoin d'une gouvernance solide, de transparence et de garde-fous éthiques afin de garantir que ces agents fonctionnent avec responsabilité et instaurent une confiance durable ».<sup class="ref"><a href="#ref-23" class="ref-link">[23]</a></sup></p>
+
+<h2 class="sh2" id="s6-1">6.1 &nbsp; Gouvernance technique</h2>
+
+<ul class="rlist">
+  <li><strong>Garde-fous (Guardrails) et filtrage sémantique.</strong> Filtres d'entrée/sortie pour détecter les tentatives de Prompt Injection et les hallucinations avant transmission aux outils. L'OWASP recommande de traiter toutes les sorties du LLM comme des données non fiables.<sup class="ref"><a href="#ref-20" class="ref-link">[20]</a></sup></li>
+  <li><strong>Sandboxing.</strong> Exécution des agents dans des conteneurs isolés sans accès au réseau interne global. Plafonds de consommation de tokens et d'appels API pour prévenir les dérives financières et opérationnelles.</li>
+  <li><strong>Least Privilege (moindre privilège).</strong> Un agent ne doit accéder qu'aux ressources strictement nécessaires à sa mission, validées par des tests de pénétration réguliers.<sup class="ref"><a href="#ref-20" class="ref-link">[20]</a></sup></li>
+  <li><strong>Observabilité en temps réel.</strong> Selon Deloitte, les plateformes de télémétrie des agents, offrant un suivi des résultats et une visualisation de l'orchestration, deviennent indispensables à mesure que l'on monte en autonomie.<sup class="ref"><a href="#ref-13" class="ref-link">[13]</a></sup></li>
+</ul>
+
+<h2 class="sh2" id="s6-2">6.2 &nbsp; Gouvernance organisationnelle</h2>
+
+<ul class="rlist">
+  <li><strong>Human-in-the-loop (HITL).</strong> Points de contrôle obligatoires pour les actions critiques. L'AFRC note que le rôle du superviseur évolue : il « délaisse le contrôle de conformité pour orchestrer des systèmes hybrides » et devient « le garant du lien empathique et de l'éthique ».<sup class="ref"><a href="#ref-24" class="ref-link">[24]</a></sup></li>
+  <li><strong>Auditabilité et Chain of Thought Logging.</strong> Enregistrement complet du raisonnement de l'agent, permettant un post-mortem rigoureux après incident.</li>
+  <li><strong>Kill Switch.</strong> Procédure de débrayage immédiat pour reprendre le contrôle manuel sur tous les agents en cas d'anomalie. Deloitte le désigne comme une exigence non négociable pour les entreprises en phase d'industrialisation.<sup class="ref"><a href="#ref-13" class="ref-link">[13]</a></sup></li>
+  <li><strong>Gouvernance de l'identité agentique.</strong> De nouveaux standards émergent : l'<strong>IAAG (Cross App Access)</strong> d'Okta et l'<strong>Entra Agent ID</strong> de Microsoft (annoncé nov. 2025) permettent de gérer le cycle de vie complet des agents non-humains.</li>
+</ul>
+
+<div class="def-box">
+  « La gouvernance ne doit pas nécessairement être bureaucratique. Un document définissant les outils approuvés, les données pouvant être traitées, les cas où une vérification humaine est obligatoire et les modalités de divulgation du contenu IA, suffit pour commencer. »
+  <cite>— Rapport Deloitte State of AI 2026.<sup class="ref"><a href="#ref-3" class="ref-link">[3]</a></sup></cite>
+</div>
+
+<h2 class="sh2" id="s6-3">6.3 &nbsp; AI Act européen</h2>
+
+<p>L'<strong>AI Act européen</strong> (adopté et entré en vigueur en août 2024) impose des obligations strictes sur les systèmes à haut risque : évaluation des risques, surveillance humaine et notification des incidents. Son article 15 mentionne explicitement la prévention des attaques manipulant le jeu de données d'apprentissage (empoisonnement de données).<sup class="ref"><a href="#ref-25" class="ref-link">[25]</a></sup> Les sanctions peuvent atteindre 35 millions d'euros ou 7 % du chiffre d'affaires mondial.</p>
+
+<p>La CNIL a précisé en juin 2025 que le développement d'un modèle d'IA peut reposer sur l'intérêt légitime de l'entreprise, à condition d'anonymiser les données. Les entreprises doivent pouvoir démontrer la traçabilité complète des actions de leurs agents pour satisfaire aux exigences de l'AI Act.<sup class="ref"><a href="#ref-25" class="ref-link">[25]</a></sup></p>
+
+
+<!-- ── 7. Synthèse ── -->
+
+<h1 class="sh1" id="s7">7 &nbsp; Synthèse et perspectives</h1>
+
+<p>Trois enseignements majeurs se dégagent de cette veille, chacun appuyé par une diversité de sources académiques, industrielles et réglementaires.</p>
+
+<p><strong>L'IA agentique est une évolution, non une rupture.</strong> Ses racines remontent aux travaux sur les systèmes multi-agents des années 1980.<sup class="ref"><a href="#ref-6" class="ref-link">[6]</a></sup> Ce que change radicalement 2025-2026, c'est l'intégration des LLM comme moteur de raisonnement, rendant ces systèmes capables d'interagir en langage naturel et d'opérer dans des environnements non structurés.</p>
+
+<p><strong>Le déploiement est davantage un problème organisationnel que technologique.</strong> McKinsey, BCG et Deloitte convergent sur ce point : la technologie est prête ; ce qui bloque les organisations, c'est l'absence de stratégie de déploiement structurée, de gouvernance des données et de compétences humaines adaptées.<sup class="ref"><a href="#ref-4" class="ref-link">[4]</a><a href="#ref-5" class="ref-link">[5]</a><a href="#ref-15" class="ref-link">[15]</a></sup> Les entreprises qui créent de la valeur substantielle sont celles qui refondent leurs processus autour des agents plutôt que d'ajouter des agents à leurs processus existants.</p>
+
+<p><strong>La sécurité est un prérequis, pas une contrainte ex post.</strong> L'OWASP Top 10 LLM 2025, le référentiel de l'OWASP sur les agents, et les alertes de HarfangLab et Siècle Digital convergent : les vecteurs d'attaque spécifiques aux agents (Goal Hijacking, empoisonnement de la mémoire, identités non-humaines) exigent des architectures de sécurité fondamentalement différentes des approches traditionnelles.<sup class="ref"><a href="#ref-19" class="ref-link">[19]</a><a href="#ref-20" class="ref-link">[20]</a><a href="#ref-21" class="ref-link">[21]</a><a href="#ref-22" class="ref-link">[22]</a></sup></p>
+
+<div class="info-note">
+  <strong>Réponse à la problématique —</strong> Concilier autonomie décisionnelle et impératifs de sécurité passe par une architecture de gouvernance à trois niveaux : <em>(1)</em> des garde-fous techniques intégrés dès la conception (sandboxing, least privilege, OWASP guardrails) ; <em>(2)</em> des mécanismes organisationnels de supervision humaine aux points critiques (HITL, kill switch, audit trail, formation) ; <em>(3)</em> un cadre réglementaire et d'identité adapté aux agents non-humains (AI Act, IAAG, CNIL). L'autonomie sans gouvernance est un risque systémique ; la gouvernance sans autonomie est une occasion manquée.
+</div>
+
+
+
+<!-- ── 8. Bibliographie ── -->
+
+<h1 class="sh1" id="s9">8 &nbsp; Bibliographie</h1>
+
+<ol class="biblio">
+
+  <li id="ref-1">
+    <div>
+            Conseil français de l'IA et du numérique, « IA agentique, niveaux d'autonomie et terminologie », cité dans : « Intelligence artificielle agentique », <em>Wikipédia (fr)</em>, mis à jour mars 2026. Disponible : <a href="https://fr.wikipedia.org/wiki/Intelligence_artificielle_agentique" target="_blank">fr.wikipedia.org</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Gartner, « 2026 est l'année des agents IA, 40 % des applications d'entreprise intégreront des agents d'ici fin 2026, contre moins de 5 % en 2025 », <em>Gartner Research</em>, 2025–2026.
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Deloitte, « State of AI in the Enterprise 2026, adoption, gouvernance et impact », <em>Deloitte France</em>, févr. 2026. Disponible : <a href="https://www.deloitte.com/fr/fr/services/consulting/perspectives/state-of-ai-in-the-enterprise.html" target="_blank">deloitte.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            McKinsey &amp; Company, « State of AI 2025 : Agents, innovation and transformation », <em>McKinsey Global Institute</em>, 2025. Résumé disponible : <a href="https://fabrice-frossard.com/ia-entreprise-2025-industrialisation-agents/" target="_blank">fabrice-frossard.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Boston Consulting Group (BCG), « AI value creation 2025, agents represent 17 % of AI value today, projected at 29 % by 2028 », analyse comparée disponible : <a href="https://www.duperrin.com/2025/12/08/impact-ia-2025-mckinsey-bcg/" target="_blank">duperrin.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            PFIA 2025, JFSMA (Journées Francophones sur les Systèmes Multi-Agents), thème 2025 : « Confiance et systèmes multi-agents ». Actes publiés chez Cépaduès, indexés HAL et DBLP. Disponible : <a href="https://pfia2025.u-bourgogne.fr/conferences/jfsma/" target="_blank">pfia2025.u-bourgogne.fr</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            WEnvision, « Entreprise agentique : définition, piliers et transformation en 2026 », <em>WEnvision Blog</em>, mars 2026. Disponible : <a href="https://www.wenvision.com/fr/univers/ai/entreprise-agentique/entreprise-agentique-transformation-ia-autonome-2026/" target="_blank">wenvision.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            McKinsey &amp; Company (résumé Libertify), « State of AI 2025, AI agents et refonte des workflows », <em>Libertify.com</em>, 2026. Disponible : <a href="https://www.libertify.com/fr/interactive-library/state-of-ai-2025-mckinsey-report/" target="_blank">libertify.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Konverso (FPT Software), « What are AI Agents : The 2026 Evolution, cas Microsoft MAI-DxO », 2026. Disponible : <a href="https://www.konverso.ai/fr/blogs/what-are-ai-agents" target="_blank">konverso.ai</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            MachineLearningMastery, « 7 Agentic AI Trends to Watch in 2026, hausse de 1 445 % des demandes Gartner sur les SMA », 5 janv. 2026. Disponible : <a href="https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/" target="_blank">machinelearningmastery.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Avisia, « 2026 : industrialisez et gouvernez vos agents IA à l'échelle, cas L'Oréal France (Ragheda El Hassan) », <em>Avisia Blog</em>, 2 févr. 2026. Disponible : <a href="https://www.avisia.fr/actualites/blog/data/ia-agentique-en-2026-comment-industrialiser-et-gouverner-vos-agents-a-lechelle" target="_blank">avisia.fr</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Deloitte, « Orchestration d'agents IA : un levier stratégique, spectre d'autonomie, enquête Tech Value 2025 (550 dirigeants) », <em>Deloitte TMT Predictions 2026</em>, déc. 2025. Disponible : <a href="https://www.deloitte.com/fr/fr/Industries/tmt/perspectives/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html" target="_blank">deloitte.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            F. Pasquet (Eleven Labs), « Architecture agent IA : structurer, orchestrer et déployer des systèmes multi-agents fiables », <em>Eleven Labs Blog</em>, 18 nov. 2025, mis à jour 26 févr. 2026. Disponible : <a href="https://eleven-labs.com/blog/architecture-agent-ia/" target="_blank">eleven-labs.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Deloitte, « Intelligence artificielle : quel retour sur investissement ?, ROI GenAI vs IA agentique, enquête 1 854 dirigeants Europe/Moyen-Orient », <em>Deloitte France</em>, nov. 2025. Disponible : <a href="https://www.deloitte.com/fr/fr/services/consulting/perspectives/intelligence-artificielle-quel-retour-sur-investissement.html" target="_blank">deloitte.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Infos Entreprises, « IA agentique en entreprise : 2026, l'année de l'autonomie », 10 févr. 2026. Disponible : <a href="https://infos-entreprises.fr/2026/02/10/ia-agentique-entreprise-2026/" target="_blank">infos-entreprises.fr</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            KPMG, « AI Pulse T4 2025, 42 % des organisations ont déployé des agents IA (contre 11 % deux trimestres plus tôt) », cité dans : Konverso, « Les agents IA au service des RH en 2026 », 2026. Disponible : <a href="https://www.konverso.ai/fr/blogs/how-ai-agents-are-transforming-human-resources-in-2026" target="_blank">konverso.ai</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            PwC, « Global AI Jobs Barometer 2025, productivité ×4, 84 % des DRH prévoient de former leurs employés en IA » ; Capgemini : 97 heures de formation IA/employé en 2025. Cité dans : Konverso, « Les agents IA au service des RH en 2026 ». Disponible : <a href="https://www.konverso.ai/fr/blogs/how-ai-agents-are-transforming-human-resources-in-2026" target="_blank">konverso.ai</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            DCOD, « IA agentique : l'OWASP dévoile son Top 10 des risques de sécurité, Goal Hijacking, empoisonnement de la mémoire », <em>DCOD.ch</em>, 25 déc. 2025. Disponible : <a href="https://dcod.ch/2025/12/25/owasp-top10-ia-agentique/" target="_blank">dcod.ch</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            OWASP Foundation, « Top 10 for Large Language Model Applications 2025, Prompt Injection n°1, Excessive Agency, System Prompt Leakage ». Disponible : <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank">owasp.org</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            HarfangLab, « Intelligence artificielle et cybersécurité : les prédictions 2026, identités non-humaines, auto-attribution de privilèges », 21 janv. 2026. Disponible : <a href="https://harfanglab.io/fr/blog/strategie/intelligence-artificielle-predictions-experts-2026/" target="_blank">harfanglab.io</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            Siècle Digital, « Cybersécurité 2026 : basculement vers les agents IA autonomes, identité numérique comme principal champ de confrontation (Palo Alto Networks) », 30 déc. 2025. Disponible : <a href="https://siecledigital.fr/2025/12/30/cybersecurite-et-ia-ce-qui-attend-vraiment-les-entreprises-en-2026/" target="_blank">siecledigital.fr</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            F. Frossard (analyse McKinsey/Stanford/OpenAI), « Stanford, McKinsey, OpenAI : rapports 2025 sur les agents autonomes en entreprise, Delphine Nain Zurkiya (McKinsey Boston) », déc. 2025. Disponible : <a href="https://fabrice-frossard.com/comment-lia-redefinit-strategie-et-gouvernance-en-entreprise/" target="_blank">fabrice-frossard.com</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            AFRC, « IA Agentique : Vers une société de l'intention, transformation du rôle du conseiller (Konecta) », <em>AFRC.org</em>, 1er avr. 2026. Disponible : <a href="https://www.afrc.org/2026/04/01/ia-agentique-vers-une-societe-de-l-intention/" target="_blank">afrc.org</a>
+    </div>
+  </li>
+
+  <li id="ref-1">
+    <div>
+            EU Artificial Intelligence Act, « Article 15 : Précision, robustesse et cybersécurité, prévention de l'empoisonnement des données d'entraînement ». Disponible : <a href="https://artificialintelligenceact.eu/" target="_blank">artificialintelligenceact.eu</a>
+    </div>
+  </li>
+
+</ol>
+
+<hr class="thin">
+<p class="colophon">Wissal El Arabiou · MOS 04 4, Nouvelles Technologies de l'Information et de la Communication · École Centrale de Lyon · 5 avril 2026</p>
+
+<hr class="thin" style="margin-top:3rem;">
+<div class="colophon-card">
+  <div class="colophon-row">
+    <div class="colophon-item">
+      <span class="colophon-label">Auteure</span>
+      <span class="colophon-value">Wissal El Arabiou</span>
+    </div>
+    <div class="colophon-item">
+      <span class="colophon-label">Option</span>
+      <span class="colophon-value">INFO &ndash; École Centrale de Lyon</span>
+    </div>
+    <div class="colophon-item">
+      <span class="colophon-label">Module</span>
+      <span class="colophon-value">MOS 04 4 &ndash; NTIC</span>
+    </div>
+    <div class="colophon-item">
+      <span class="colophon-label">Enseignant</span>
+      <span class="colophon-value">Mohsen Ardabilian</span>
+    </div>
+  </div>
+</div>
+
+  </main>
+
+  <aside class="sidebar">
+    <div class="sidebar-title">Sommaire</div>
+    <ul class="toc">
+      <li class="h1"><a href="#s1">1. Introduction</a></li>
+      <li class="h2"><a href="#s1-1">1.1 Contexte et enjeux</a></li>
+      <li class="h2"><a href="#s1-3">1.2 Objectifs</a></li>
+      <li class="h1"><a href="#s2">2. Fondements</a></li>
+      <li class="h2"><a href="#s2-1">2.1 Définition</a></li>
+      <li class="h2"><a href="#s2-2">2.2 Workflow</a></li>
+      <li class="h1"><a href="#s3">3. Architecture</a></li>
+      <li class="h2"><a href="#s3-1">3.1 Orchestration</a></li>
+      <li class="h2"><a href="#s3-2">3.2 Frameworks</a></li>
+      <li class="h1"><a href="#s4">4. Déploiement</a></li>
+      <li class="h2"><a href="#s4-1">4.1 Phases</a></li>
+      <li class="h2"><a href="#s4-2">4.2 Prérequis</a></li>
+      <li class="h2"><a href="#s4-3">4.3 ROI</a></li>
+      <li class="h1"><a href="#s5">5. Risques</a></li>
+      <li class="h2"><a href="#s5-1">5.1 Opérationnels</a></li>
+      <li class="h2"><a href="#s5-2">5.2 OWASP</a></li>
+      <li class="h2"><a href="#s5-3">5.3 Identité</a></li>
+      <li class="h1"><a href="#s6">6. Gouvernance</a></li>
+      <li class="h2"><a href="#s6-1">6.1 Technique</a></li>
+      <li class="h2"><a href="#s6-2">6.2 Organisationnelle</a></li>
+      <li class="h2"><a href="#s6-3">6.3 AI Act</a></li>
+      <li class="h1"><a href="#s7">7. Synthèse</a></li>
+      <li class="h1"><a href="#s9">8. Bibliographie</a></li>
+    </ul>
+  </aside>
+
+</div>
+
+<footer class="site-footer">
+  MOS 04 4 &ndash; Nouvelles Technologies de l'Information et de la Communication &ndash; École Centrale de Lyon
+</footer>
+
+</body>
+</html>
